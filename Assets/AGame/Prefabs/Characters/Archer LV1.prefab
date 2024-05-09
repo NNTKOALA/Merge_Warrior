@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2978416865913998257}
   - component: {fileID: 1940893154364870867}
   - component: {fileID: 5555197704101850124}
-  - component: {fileID: -8962943194298019792}
+  - component: {fileID: 4184979205557460140}
   m_Layer: 0
   m_Name: Archer LV1
   m_TagString: Untagged
@@ -78,7 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb5be66096b22340b11d1ace2e720fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8962943194298019792
+  playerTileLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &4184979205557460140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5602900353037445276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1d747d4aaddcb4c926d20c506aa38c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e81777fbd780e247ae0065e578459ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
@@ -95,6 +98,8 @@ MonoBehaviour:
   range: 10
   level: 1
   charType: 1
+  targetInRange: []
+  rb: {fileID: 2978416865913998257}
 --- !u!1001 &3067765944598595255
 PrefabInstance:
   m_ObjectHideFlags: 0

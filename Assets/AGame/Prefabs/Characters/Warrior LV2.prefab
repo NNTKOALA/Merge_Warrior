@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7151515561526838423}
   - component: {fileID: 5407463268542291126}
   - component: {fileID: 4649321517219645746}
-  - component: {fileID: -6430657447207102513}
+  - component: {fileID: -4628994225546102611}
   m_Layer: 0
   m_Name: Warrior LV2
   m_TagString: Untagged
@@ -78,7 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb5be66096b22340b11d1ace2e720fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6430657447207102513
+  playerTileLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &-4628994225546102611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4986115341252608382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1d747d4aaddcb4c926d20c506aa38c, type: 3}
+  m_Script: {fileID: 11500000, guid: 557636d9d7e8edc45b81173b0eb2f55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
@@ -95,6 +98,8 @@ MonoBehaviour:
   range: 2
   level: 2
   charType: 0
+  targetInRange: []
+  rb: {fileID: 7151515561526838423}
 --- !u!1001 &5276822800093671309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +155,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95003646913582878, guid: 884c15e3eb28db240bffc0f127a9da50, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5f395a800e9702b4081f721c72cce643, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 884c15e3eb28db240bffc0f127a9da50, type: 3}
 --- !u!4 &5275029947912042019 stripped

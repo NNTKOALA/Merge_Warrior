@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9137569946812786659}
   - component: {fileID: 3563351440307269748}
   - component: {fileID: 7959868970094080053}
-  - component: {fileID: -8017575272106740988}
+  - component: {fileID: -614133243404175140}
   m_Layer: 0
   m_Name: Archer LV3
   m_TagString: Untagged
@@ -78,7 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb5be66096b22340b11d1ace2e720fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8017575272106740988
+  playerTileLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &-614133243404175140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8365903420470723385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1d747d4aaddcb4c926d20c506aa38c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e81777fbd780e247ae0065e578459ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 25
@@ -95,6 +98,8 @@ MonoBehaviour:
   range: 10
   level: 3
   charType: 1
+  targetInRange: []
+  rb: {fileID: 9137569946812786659}
 --- !u!1001 &1115270689184928953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +155,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95377614863565942, guid: 6d2439cd37ba6e840b4923bb19250362, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a43f966e2b7b6b54bbaa710c729e8858, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d2439cd37ba6e840b4923bb19250362, type: 3}
 --- !u!4 &1113678659448211655 stripped

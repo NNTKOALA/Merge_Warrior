@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2159949974124907878}
   - component: {fileID: 8347280949144721807}
   - component: {fileID: 8037617683791095156}
-  - component: {fileID: 1775966669755937467}
+  - component: {fileID: 5258305683126007204}
   m_Layer: 0
   m_Name: Warrior LV1
   m_TagString: Untagged
@@ -78,7 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb5be66096b22340b11d1ace2e720fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1775966669755937467
+  playerTileLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &5258305683126007204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9059267165606634248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1d747d4aaddcb4c926d20c506aa38c, type: 3}
+  m_Script: {fileID: 11500000, guid: 557636d9d7e8edc45b81173b0eb2f55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
@@ -95,6 +98,8 @@ MonoBehaviour:
   range: 2
   level: 1
   charType: 0
+  targetInRange: []
+  rb: {fileID: 2159949974124907878}
 --- !u!1001 &6463500484636483974
 PrefabInstance:
   m_ObjectHideFlags: 0
