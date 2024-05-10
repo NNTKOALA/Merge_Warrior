@@ -5,16 +5,29 @@ using UnityEngine;
 public class CharacterDragandDrop : MonoBehaviour
 {
     private Vector3 offset;
+    private bool isDragging = false;
+    private float smoothness = 10f;
 
     private void OnMouseDown()
     {
-        offset = gameObject.transform.position - GetMouseWorldPosition();
+        offset = transform.position - GetMouseWorldPosition();
+        isDragging = true;
     }
 
     private void OnMouseDrag()
     {
-        Vector3 newPosition = GetMouseWorldPosition() + offset;
-        transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
+        if (isDragging)
+        {
+            Vector3 targetPosition = GetMouseWorldPosition() + offset;
+            targetPosition.y = transform.position.y;
+            float step = smoothness * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        isDragging = false;
     }
 
     private Vector3 GetMouseWorldPosition()

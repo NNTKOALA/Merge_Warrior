@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 7151515561526838423}
   - component: {fileID: 5407463268542291126}
   - component: {fileID: 4649321517219645746}
+  - component: {fileID: 7075877679997712753}
   - component: {fileID: -4628994225546102611}
   m_Layer: 0
   m_Name: Warrior LV2
-  m_TagString: Untagged
+  m_TagString: Warrior
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +48,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 90
@@ -60,7 +61,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4986115341252608382}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1.5
@@ -78,9 +79,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb5be66096b22340b11d1ace2e720fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTileLayer:
-    serializedVersion: 2
-    m_Bits: 64
+--- !u!114 &7075877679997712753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4986115341252608382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277fdb2f6943cb24aa892a0109391cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4628994225546102611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 557636d9d7e8edc45b81173b0eb2f55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 5218140557752498323}
   health: 20
   damage: 10
   range: 2
@@ -161,6 +172,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5f395a800e9702b4081f721c72cce643, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 884c15e3eb28db240bffc0f127a9da50, type: 3}
+--- !u!95 &5218140557752498323 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95003646913582878, guid: 884c15e3eb28db240bffc0f127a9da50, type: 3}
+  m_PrefabInstance: {fileID: 5276822800093671309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5275029947912042019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4399880170363310, guid: 884c15e3eb28db240bffc0f127a9da50, type: 3}

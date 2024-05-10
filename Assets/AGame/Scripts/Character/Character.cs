@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
     [SerializeField] public Animator anim;
-    [SerializeField] protected float health = 0f;
-    [SerializeField] protected float damage = 0f;
-    [SerializeField] protected float range = 0f;
-    [SerializeField] protected float level = 0f;
+    [SerializeField] protected int health = 0;
+    [SerializeField] protected int damage = 0;
+    [SerializeField] protected int range = 0;
+    [SerializeField] protected int level = 0;
     [SerializeField] CharType charType;
 
     [SerializeField] protected Collider[] targetInRange;
@@ -16,10 +17,17 @@ public class Character : MonoBehaviour
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
 
+    public int Level
+    {
+        get { return level; }
+        set { level = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         isDead = false;
+        level = 1;
     }
 
     // Update is called once per frame
@@ -55,11 +63,6 @@ public class Character : MonoBehaviour
             Debug.Log("Die");
             OnDead();
         }
-    }
-
-    public void MergeCharacter()
-    {
-
     }
 
 /*    public Character FindClosetEnemy()
@@ -124,5 +127,15 @@ public class Character : MonoBehaviour
         isDead = true;
         ChangeAnim("die");
         Debug.Log("Die");
+    }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+
+    public CharType GetCharType()
+    {
+        return charType;
     }
 }
