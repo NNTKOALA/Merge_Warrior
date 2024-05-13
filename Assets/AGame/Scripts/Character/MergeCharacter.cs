@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class MergeCharacter : MonoBehaviour
 {
+    public MergeManager mergeManager;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Warrior") || other.gameObject.CompareTag("Archer"))
+        if (other.CompareTag("Warrior") || other.CompareTag("Archer"))
         {
             Character otherCharacter = other.GetComponent<Character>();
             Character thisCharacter = GetComponent<Character>();
 
             if (otherCharacter.GetLevel() == thisCharacter.GetLevel() && otherCharacter.GetCharType() == thisCharacter.GetCharType())
             {
-                Debug.Log("Merger");
+                Debug.Log("Merge");
+
+                Destroy(other.gameObject);
                 Destroy(gameObject);
-                CreateNewCharacter(thisCharacter.GetLevel() + 1);
+
+                GameObject newCharacterPrefab = mergeManager.GetCharacterPrefab(thisCharacter.GetCharType());
+                Instantiate(newCharacterPrefab, transform.position, Quaternion.identity);
             }
             else
             {
@@ -25,11 +31,5 @@ public class MergeCharacter : MonoBehaviour
                 transform.position = temp;
             }
         }
-    }
-
-    private void CreateNewCharacter(int newLevel)
-    {
-        //GameObject newCharacter = Instantiate(CharacterPrefab, transform.position, Quaternion.identity);
-        Debug.Log("New Character");
     }
 }

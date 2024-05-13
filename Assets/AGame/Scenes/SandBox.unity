@@ -1196,6 +1196,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141311908}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1217795722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1217795723}
+  - component: {fileID: 1217795724}
+  m_Layer: 0
+  m_Name: Merge Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1217795723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217795722}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1217795724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217795722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73bcabaee156da443b8d2acf7aa1f8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterPrefabs:
+  - characterName: Archer Lv1
+    characterType: 1
+    characterPrefab: {fileID: 5602900353037445276, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+  - characterName: Archer Lv2
+    characterType: 1
+    characterPrefab: {fileID: 1974826980912959812, guid: 4d4c2fe8bc50cfc44aa1a5d519dd6b0b, type: 3}
+  - characterName: Archer Lv3
+    characterType: 1
+    characterPrefab: {fileID: 8365903420470723385, guid: ab4fbe54b6b8533478311b82d4ccdae6, type: 3}
+  - characterName: Archer Lv4
+    characterType: 1
+    characterPrefab: {fileID: 4238716133166833270, guid: 77d2464bf93e29b47aa5df9d2ae33a87, type: 3}
+  - characterName: Warrior Lv1
+    characterType: 0
+    characterPrefab: {fileID: 9059267165606634248, guid: d1982aec7ee2f5849b3976234b77a50b, type: 3}
+  - characterName: Warrior Lv2
+    characterType: 1
+    characterPrefab: {fileID: 4986115341252608382, guid: 8eea0ec05ba0aba46811a92adcf0dd09, type: 3}
+  - characterName: Warrior Lv3
+    characterType: 1
+    characterPrefab: {fileID: 1540121772021507904, guid: 15ebc4674101c094881dea1a2984b54e, type: 3}
+  - characterName: Warrior Lv4
+    characterType: 1
+    characterPrefab: {fileID: 2568535548750144256, guid: 7ec9cd380897fe14da171664ea73d220, type: 3}
 --- !u!1001 &1238965107
 PrefabInstance:
   m_ObjectHideFlags: 0

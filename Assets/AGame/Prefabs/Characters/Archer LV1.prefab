@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2978416865913998257}
   - component: {fileID: 1940893154364870867}
   - component: {fileID: 5555197704101850124}
-  - component: {fileID: -4188540130883381243}
   - component: {fileID: 4184979205557460140}
+  - component: {fileID: 1444016502551703348}
   m_Layer: 0
   m_Name: Archer LV1
   m_TagString: Archer
@@ -79,18 +79,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb5be66096b22340b11d1ace2e720fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-4188540130883381243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602900353037445276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277fdb2f6943cb24aa892a0109391cfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4184979205557460140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +99,19 @@ MonoBehaviour:
   charType: 1
   targetInRange: []
   rb: {fileID: 2978416865913998257}
+--- !u!114 &1444016502551703348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602900353037445276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277fdb2f6943cb24aa892a0109391cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterPrefabs: {fileID: 0}
 --- !u!1001 &3067765944598595255
 PrefabInstance:
   m_ObjectHideFlags: 0

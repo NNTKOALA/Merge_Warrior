@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3572077005634906259}
   - component: {fileID: 970707908095373302}
   - component: {fileID: 3391357640925499791}
-  - component: {fileID: 7108355702381520979}
   - component: {fileID: -7566635509945462207}
+  - component: {fileID: -2451284823113219929}
   m_Layer: 0
   m_Name: Warrior LV3
   m_TagString: Warrior
@@ -79,18 +79,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb5be66096b22340b11d1ace2e720fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7108355702381520979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540121772021507904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277fdb2f6943cb24aa892a0109391cfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-7566635509945462207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +99,19 @@ MonoBehaviour:
   charType: 0
   targetInRange: []
   rb: {fileID: 3572077005634906259}
+--- !u!114 &-2451284823113219929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540121772021507904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277fdb2f6943cb24aa892a0109391cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterPrefabs: {fileID: 0}
 --- !u!1001 &2634974309512047308
 PrefabInstance:
   m_ObjectHideFlags: 0
