@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3355329159775739799}
   - component: {fileID: 6176658523670863930}
   - component: {fileID: -6799929625618677045}
-  - component: {fileID: -5692068166691779325}
   m_Layer: 0
   m_Name: Archer LV2
   m_TagString: Archer
@@ -92,26 +91,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 6756362602652825422}
+  playerTile:
+    serializedVersion: 2
+    m_Bits: 64
   health: 15
   damage: 20
   range: 10
-  level: 2
+  charLevel: 1
   charType: 1
   targetInRange: []
   rb: {fileID: 19339304550260265}
---- !u!114 &-5692068166691779325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974826980912959812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277fdb2f6943cb24aa892a0109391cfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterPrefabs: {fileID: 0}
 --- !u!1001 &6669833532520380226
 PrefabInstance:
   m_ObjectHideFlags: 0

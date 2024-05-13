@@ -6,10 +6,11 @@ using UnityEngine.TextCore.Text;
 public class Character : MonoBehaviour
 {
     [SerializeField] public Animator anim;
+    [SerializeField] LayerMask playerTile;
     [SerializeField] protected int health = 0;
     [SerializeField] protected int damage = 0;
     [SerializeField] protected int range = 0;
-    [SerializeField] protected int level = 0;
+    [SerializeField] CharLevel charLevel;
     [SerializeField] CharType charType;
 
     [SerializeField] protected Collider[] targetInRange;
@@ -17,17 +18,12 @@ public class Character : MonoBehaviour
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
 
-    public int Level
-    {
-        get { return level; }
-        set { level = value; }
-    }
+    private Tile tile;
 
     // Start is called before the first frame update
     void Start()
     {
         isDead = false;
-        level = 1;
     }
 
     // Update is called once per frame
@@ -129,13 +125,45 @@ public class Character : MonoBehaviour
         Debug.Log("Die");
     }
 
-    public int GetLevel()
+    public CharLevel GetLevel()
     {
-        return level;
+        return charLevel;
     }
 
     public CharType GetCharType()
     {
         return charType;
+    }
+
+    public bool CheckOnTile()
+    {
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * 1f, Color.red);
+
+        RaycastHit hit;
+
+        return Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down * 2f, out hit, 0.4f, playerTile);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Warrior") || other.CompareTag("Archer"))
+        {
+            Character otherCharacter = other.GetComponent<Character>();
+            Character thisCharacter = GetComponent<Character>();
+
+            if (otherCharacter.GetLevel() == thisCharacter.GetLevel() && otherCharacter.GetCharType() == thisCharacter.GetCharType())
+            {
+                Debug.Log("Merge");
+                GameObject newCharacterPrefab = tile.GetCharacterPrefab(thisCharacter.GetCharType(), thisCharacter.GetLevel());
+                Instantiate(newCharacterPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.Log("Change Position");
+                Vector3 temp = other.transform.position;
+                other.transform.position = transform.position;
+                transform.position = temp;
+            }
+        }
     }
 }

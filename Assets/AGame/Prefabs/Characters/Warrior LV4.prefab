@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5568521659173420722}
   - component: {fileID: 1467979682193236599}
   - component: {fileID: -5997007868125971584}
-  - component: {fileID: 1396991793856826335}
   m_Layer: 0
   m_Name: Warrior LV4
   m_TagString: Warrior
@@ -92,26 +91,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 6702129298066426375}
+  playerTile:
+    serializedVersion: 2
+    m_Bits: 64
   health: 80
   damage: 20
   range: 2
-  level: 4
+  charLevel: 3
   charType: 0
   targetInRange: []
   rb: {fileID: 4005700994958904574}
---- !u!114 &1396991793856826335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568535548750144256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277fdb2f6943cb24aa892a0109391cfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterPrefabs: {fileID: 0}
 --- !u!1001 &6652350879135013925
 PrefabInstance:
   m_ObjectHideFlags: 0
