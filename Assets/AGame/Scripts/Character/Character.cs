@@ -7,9 +7,9 @@ public class Character : MonoBehaviour
 {
     [SerializeField] public Animator anim;
     [SerializeField] LayerMask playerTile;
-    [SerializeField] protected int health = 0;
-    [SerializeField] protected int damage = 0;
-    [SerializeField] protected int range = 0;
+    [SerializeField] protected int health = 100;
+    [SerializeField] protected int damage;
+    [SerializeField] protected int range;
     [SerializeField] CharLevel charLevel;
     [SerializeField] CharType charType;
 
@@ -20,14 +20,19 @@ public class Character : MonoBehaviour
 
     private Tile tile;
 
+    protected int maxHealth;
+    protected int currentHealth;
+
+    public HealthBar healthBar;
+
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         isDead = false;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         
     }
@@ -51,9 +56,10 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
         health -= damage;
+        healthBar.SetHealth(health);
         if (health <= 0)
         {
             Debug.Log("Die");
@@ -125,6 +131,11 @@ public class Character : MonoBehaviour
         Debug.Log("Die");
     }
 
+    public int GetHealth()
+    {
+        return health;
+    }
+
     public CharLevel GetLevel()
     {
         return charLevel;
@@ -151,7 +162,7 @@ public class Character : MonoBehaviour
             Character otherCharacter = other.GetComponent<Character>();
             Character thisCharacter = GetComponent<Character>();
 
-            if (otherCharacter.GetLevel() == thisCharacter.GetLevel() && otherCharacter.GetCharType() == thisCharacter.GetCharType())
+            if (otherCharacter.GetCharType() == thisCharacter.GetCharType() && otherCharacter.GetLevel() == thisCharacter.GetLevel())
             {
                 Debug.Log("Merge");
                 GameObject newCharacterPrefab = tile.GetCharacterPrefab(thisCharacter.GetCharType(), thisCharacter.GetLevel());

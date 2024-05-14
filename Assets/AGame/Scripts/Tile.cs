@@ -48,12 +48,4 @@ public class Tile : MonoBehaviour
         }
         return null;
     }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (isPlaceable)
-        {
-
-        }
-    }
 }
