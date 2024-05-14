@@ -318,6 +318,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77d2464bf93e29b47aa5df9d2ae33a87, type: 3}
+--- !u!114 &147061328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4184979205557460140, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+  m_PrefabInstance: {fileID: 440671785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e81777fbd780e247ae0065e578459ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &170590828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -741,27 +752,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 871237556, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 871237556, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1261619535, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261619535, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027114144, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 200
       objectReference: {fileID: 0}
-    - target: {fileID: 1261619535, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+    - target: {fileID: 2027114144, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
       propertyPath: m_SizeDelta.y
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2027114144, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
+      propertyPath: m_LocalPosition.z
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2027114144, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
+      propertyPath: m_AnchoredPosition.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027114144, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978416865913998257, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+      propertyPath: m_Constraints
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 4304474266081151991, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
       propertyPath: m_RootOrder
@@ -807,6 +834,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5555197704101850124, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 147061328}
     - target: {fileID: 5602900353037445276, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
       propertyPath: m_Name
       value: Archer LV1
@@ -1012,6 +1043,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2159949974124907878, guid: d1982aec7ee2f5849b3976234b77a50b, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 5258305683126007204, guid: d1982aec7ee2f5849b3976234b77a50b, type: 3}
       propertyPath: healthBar
       value: 
@@ -1066,7 +1101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9059267165606634248, guid: d1982aec7ee2f5849b3976234b77a50b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1982aec7ee2f5849b3976234b77a50b, type: 3}

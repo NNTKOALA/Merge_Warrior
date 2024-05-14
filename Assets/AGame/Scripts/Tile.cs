@@ -17,6 +17,9 @@ public class Tile : MonoBehaviour
 
     public List<CharacterPrefabData> characterPrefabs = new List<CharacterPrefabData>();
 
+    private Renderer renderer;
+    private Color originalColor;
+
     public bool IsPlaceable
     {
         get
@@ -28,7 +31,8 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        renderer = GetComponent<Renderer>();
+        originalColor = renderer.material.color;
     }
 
     // Update is called once per frame
@@ -47,5 +51,31 @@ public class Tile : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void Highlight()
+    {
+        renderer.material.color = Color.green;
+    }
+
+    public void ResetColor()
+    {
+        renderer.material.color = originalColor;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Archer" || collision.gameObject.tag == "Warrior")
+        {
+            collision.transform.SetParent(transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Archer" || collision.gameObject.tag == "Warrior")
+        {
+            collision.transform.SetParent(null);
+        }
     }
 }

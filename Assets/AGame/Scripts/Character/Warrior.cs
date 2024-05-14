@@ -9,13 +9,12 @@ public class Warrior : Character
     // Start is called before the first frame update
     protected override void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        int currentHealth = GetHealth();
+        base.Start();
 
-        health = maxHealth;
+        rb = GetComponent<Rigidbody>();
+
         currentHealth = maxHealth;
-        healthBar.SetHealth(maxHealth);
-        Debug.Log("Player health " + health + " max health " + maxHealth + " current health " + currentHealth);
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame

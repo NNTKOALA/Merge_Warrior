@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] public Animator anim;
     [SerializeField] LayerMask playerTile;
-    [SerializeField] protected int health = 100;
+    [SerializeField] protected int health;
     [SerializeField] protected int damage;
     [SerializeField] protected int range;
     [SerializeField] CharLevel charLevel;
@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
 
     private Tile tile;
 
-    protected int maxHealth;
+    protected int maxHealth = 100;
     protected int currentHealth;
 
     public HealthBar healthBar;
@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
     protected virtual void Start()
     {
         isDead = false;
+        health = 100;
     }
 
     // Update is called once per frame
@@ -148,7 +149,7 @@ public class Character : MonoBehaviour
 
     public bool CheckOnTile()
     {
-        Debug.DrawLine(transform.position, transform.position + Vector3.down * 1f, Color.red);
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * .2f, Color.red);
 
         RaycastHit hit;
 
