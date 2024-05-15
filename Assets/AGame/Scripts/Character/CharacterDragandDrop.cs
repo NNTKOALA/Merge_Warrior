@@ -59,4 +59,37 @@ public class CharacterDragandDrop : MonoBehaviour
             currentTile = null;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Warrior") || other.CompareTag("Archer"))
+        {
+            Character otherCharacter = other.GetComponent<Character>();
+            Character thisCharacter = GetComponent<Character>();
+
+            if (otherCharacter.GetCharType() == thisCharacter.GetCharType() && otherCharacter.GetLevel() == thisCharacter.GetLevel())
+            {
+                Debug.Log("Merge");
+
+                Tile tile = FindObjectOfType<Tile>();
+
+                GameObject newCharacterPrefab = tile.GetCharacterPrefab(thisCharacter.GetCharType(), thisCharacter.GetLevel());
+
+                if (newCharacterPrefab != null)
+                {
+                    Destroy(other.gameObject);
+                    Destroy(this.gameObject);
+                    Instantiate(newCharacterPrefab, transform.position, Quaternion.identity);
+                }
+            }
+            else
+            {
+                Debug.Log("Change Position");
+
+                Vector3 tempPosition = other.transform.position;
+                other.transform.position = this.transform.position;
+                this.transform.position = tempPosition;
+            }
+        }
+    }
 }

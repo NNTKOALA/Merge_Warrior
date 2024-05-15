@@ -18,12 +18,10 @@ public class Character : MonoBehaviour
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
 
-    private Tile tile;
-
-    protected int maxHealth = 100;
+/*    protected int maxHealth = 100;
     protected int currentHealth;
 
-    public HealthBar healthBar;
+    public HealthBar healthBar;*/
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -31,6 +29,8 @@ public class Character : MonoBehaviour
         isDead = false;
         health = 100;
         CheckOnTile();
+/*        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);*/
     }
 
     // Update is called once per frame
@@ -61,7 +61,7 @@ public class Character : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        healthBar.SetHealth(health);
+        //healthBar.SetHealth(health);
         if (health <= 0)
         {
             Debug.Log("Die");
@@ -146,11 +146,6 @@ public class Character : MonoBehaviour
     public CharType GetCharType()
     {
         return charType;
-    }
-
-    public void Upgrade()
-    {
-        charLevel++;
     }
 
     public bool CheckOnTile()

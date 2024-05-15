@@ -1127,6 +1127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer LV1
       objectReference: {fileID: 0}
+    - target: {fileID: 5602900353037445276, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
 --- !u!1001 &590457878

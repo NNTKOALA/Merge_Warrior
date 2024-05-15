@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4734075997400199585}
   - component: {fileID: 8930765234458898176}
   - component: {fileID: 8423829253652515385}
-  - component: {fileID: 7465741143146473109}
   m_Layer: 6
   m_Name: Player Tile
   m_TagString: Player Tile
@@ -145,15 +144,3 @@ MonoBehaviour:
     characterLevel: 3
     characterType: 0
     characterPrefab: {fileID: 2568535548750144256, guid: 7ec9cd380897fe14da171664ea73d220, type: 3}
---- !u!114 &7465741143146473109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3313560540790540645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 378382b9b946e794c89a1f6a5adf7746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

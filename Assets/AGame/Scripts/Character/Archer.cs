@@ -12,9 +12,6 @@ public class Archer : Character
         base.Start();
 
         rb = GetComponent<Rigidbody>();
-
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
