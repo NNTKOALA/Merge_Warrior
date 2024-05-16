@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 970707908095373302}
   - component: {fileID: 3391357640925499791}
   - component: {fileID: -7566635509945462207}
+  - component: {fileID: -1334684729396554401}
   m_Layer: 0
   m_Name: Warrior LV3
   m_TagString: Warrior
@@ -96,11 +97,35 @@ MonoBehaviour:
     m_Bits: 64
   health: 40
   damage: 15
-  range: 2
   charLevel: 2
   charType: 0
+  chaseRange: 8
+  turnSpeed: 5
   targetInRange: []
+  target: {fileID: 0}
   rb: {fileID: 3572077005634906259}
+--- !u!195 &-1334684729396554401
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540121772021507904}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &2634974309512047308
 PrefabInstance:
   m_ObjectHideFlags: 0
