@@ -6,7 +6,7 @@ public class CharacterDragandDrop : MonoBehaviour
 {
     Vector3 offset;
     float initialY;
-    private Tile currentTile = null;
+    private PlayerTile currentTile = null;
 
     private void Start()
     {
@@ -22,18 +22,24 @@ public class CharacterDragandDrop : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (gameObject.tag == "Enemy")
+            return;
+
         offset = GetMousePos() - transform.position;
     }
 
     private void OnMouseDrag()
     {
+        if (gameObject.tag == "Enemy")
+            return;
+
         Vector3 mouseWorldPos = GetMousePos();
         transform.position = new Vector3(mouseWorldPos.x - offset.x, initialY, mouseWorldPos.z - offset.z);
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit))
         {
-            Tile hitTile = hit.collider.GetComponent<Tile>();
+            PlayerTile hitTile = hit.collider.GetComponent<PlayerTile>();
             if (hitTile != null)
             {
                 if (currentTile != null && currentTile != hitTile)
@@ -53,6 +59,9 @@ public class CharacterDragandDrop : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (gameObject.tag == "Enemy")
+            return;
+
         if (currentTile != null)
         {
             currentTile.ResetColor();
@@ -62,7 +71,7 @@ public class CharacterDragandDrop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Warrior") || other.CompareTag("Archer"))
+        if (other.gameObject.tag == "Player")
         {
             Character otherCharacter = other.GetComponent<Character>();
             Character thisCharacter = GetComponent<Character>();
@@ -71,7 +80,7 @@ public class CharacterDragandDrop : MonoBehaviour
             {
                 Debug.Log("Merge");
 
-                Tile tile = FindObjectOfType<Tile>();
+                PlayerTile tile = FindObjectOfType<PlayerTile>();
 
                 GameObject newCharacterPrefab = tile.GetCharacterPrefab(thisCharacter.GetCharType(), thisCharacter.GetLevel());
 

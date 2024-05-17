@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 8347280949144721807}
   - component: {fileID: 8037617683791095156}
   - component: {fileID: 5258305683126007204}
+  - component: {fileID: 6939317000745822911}
   - component: {fileID: -7977517034300254511}
   m_Layer: 0
   m_Name: Warrior LV1
-  m_TagString: Warrior
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,11 +100,24 @@ MonoBehaviour:
   damage: 5
   charLevel: 0
   charType: 0
-  chaseRange: 8
-  turnSpeed: 5
-  targetInRange: []
-  target: {fileID: 0}
+  characterLayer:
+    serializedVersion: 2
+    m_Bits: 0
   rb: {fileID: 2159949974124907878}
+--- !u!114 &6939317000745822911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9059267165606634248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a325bd32d8d7b48438a728631d7b773f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 5
+  chaseRange: 8
 --- !u!195 &-7977517034300254511
 NavMeshAgent:
   m_ObjectHideFlags: 0

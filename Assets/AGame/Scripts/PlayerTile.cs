@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class PlayerTile : MonoBehaviour
 {
     [SerializeField] bool isPlaceable;
     [System.Serializable]
@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public GameObject GetCharacterPrefab(CharType type, CharLevel level)
@@ -65,7 +65,7 @@ public class Tile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Archer" || collision.gameObject.tag == "Warrior")
+        if (collision.gameObject.tag == "Player")
         {
             collision.transform.SetParent(transform);
         }
@@ -73,7 +73,7 @@ public class Tile : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Archer" || collision.gameObject.tag == "Warrior")
+        if (collision.gameObject.tag == "Player")
         {
             collision.transform.SetParent(null);
         }

@@ -6,8 +6,7 @@ TagManager:
   tags:
   - Player Tile
   - Enemy Tile
-  - Warrior
-  - Archer
+  - Enemy
   layers:
   - Default
   - TransparentFX

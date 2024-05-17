@@ -10,7 +10,6 @@ public class Archer : Character
     protected override void Start()
     {
         base.Start();
-
         rb = GetComponent<Rigidbody>();
     }
 

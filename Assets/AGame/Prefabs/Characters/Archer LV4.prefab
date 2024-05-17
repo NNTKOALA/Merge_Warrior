@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 6765440099829456305}
   - component: {fileID: 5604590290746936796}
   - component: {fileID: -2287437666314945707}
+  - component: {fileID: -5406034204466859339}
   - component: {fileID: 810121671528516010}
   m_Layer: 0
   m_Name: Archer LV4
-  m_TagString: Archer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,11 +100,24 @@ MonoBehaviour:
   damage: 80
   charLevel: 3
   charType: 1
-  chaseRange: 22
-  turnSpeed: 5
-  targetInRange: []
-  target: {fileID: 0}
+  characterLayer:
+    serializedVersion: 2
+    m_Bits: 0
   rb: {fileID: 6017566622570416923}
+--- !u!114 &-5406034204466859339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4238716133166833270}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a325bd32d8d7b48438a728631d7b773f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSpeed: 5
+  chaseRange: 22
 --- !u!195 &810121671528516010
 NavMeshAgent:
   m_ObjectHideFlags: 0
