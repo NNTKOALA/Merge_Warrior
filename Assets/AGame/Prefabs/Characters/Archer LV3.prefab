@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3563351440307269748}
   - component: {fileID: 7959868970094080053}
   - component: {fileID: -614133243404175140}
-  - component: {fileID: -3791021292018419598}
+  - component: {fileID: 4738281925256460792}
   - component: {fileID: -3199543675633025796}
   m_Layer: 0
   m_Name: Archer LV3
@@ -100,24 +100,25 @@ MonoBehaviour:
   damage: 40
   charLevel: 2
   charType: 1
+  turnSpeed: 5
+  chaseRange: 22
   characterLayer:
     serializedVersion: 2
     m_Bits: 0
   rb: {fileID: 9137569946812786659}
---- !u!114 &-3791021292018419598
+--- !u!114 &4738281925256460792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8365903420470723385}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a325bd32d8d7b48438a728631d7b773f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4439a2e724d555c41af3551734f96467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 5
-  chaseRange: 22
+  allowedArea: {fileID: 0}
 --- !u!195 &-3199543675633025796
 NavMeshAgent:
   m_ObjectHideFlags: 0

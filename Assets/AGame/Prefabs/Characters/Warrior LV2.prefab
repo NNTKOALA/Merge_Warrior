@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5407463268542291126}
   - component: {fileID: 4649321517219645746}
   - component: {fileID: -4628994225546102611}
-  - component: {fileID: 104345818484763835}
+  - component: {fileID: 4942033060560576693}
   - component: {fileID: 2318930385484867951}
   m_Layer: 0
   m_Name: Warrior LV2
@@ -100,11 +100,13 @@ MonoBehaviour:
   damage: 10
   charLevel: 1
   charType: 0
+  turnSpeed: 5
+  chaseRange: 10
   characterLayer:
     serializedVersion: 2
     m_Bits: 0
   rb: {fileID: 7151515561526838423}
---- !u!114 &104345818484763835
+--- !u!114 &4942033060560576693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,11 +115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4986115341252608382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a325bd32d8d7b48438a728631d7b773f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4439a2e724d555c41af3551734f96467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 5
-  chaseRange: 8
+  allowedArea: {fileID: 0}
 --- !u!195 &2318930385484867951
 NavMeshAgent:
   m_ObjectHideFlags: 0

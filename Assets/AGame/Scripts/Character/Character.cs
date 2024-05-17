@@ -12,8 +12,14 @@ public class Character : MonoBehaviour
     [SerializeField] protected int damage;
     [SerializeField] CharLevel charLevel;
     [SerializeField] CharType charType;
+    [SerializeField] public float turnSpeed = 5f;
+    [SerializeField] float chaseRange = 10f;
 
     public LayerMask characterLayer;
+
+    private NavMeshAgent navMeshAgent;
+    private Transform target;
+    private bool isTargetWithinRange;
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
@@ -28,6 +34,7 @@ public class Character : MonoBehaviour
     {
         isDead = false;
         health = 100;
+        navMeshAgent = GetComponent<NavMeshAgent>();
 
         /*        currentHealth = maxHealth;
                 GameObject hb = Instantiate(healthBarPrefab, transform);
@@ -40,6 +47,13 @@ public class Character : MonoBehaviour
     protected virtual void Update()
     {
         if (isDead) return;
+
+        FindClosestTarget();
+        if (target != null && isTargetWithinRange)
+        {
+            MoveToTarget();
+            LookAtTarget();
+        }
     }
 
     protected void ChangeAnim(string animName)
@@ -113,5 +127,58 @@ public class Character : MonoBehaviour
         {
             healthBar.SetColor(color);
         }*/
+    }
+
+    public void FindClosestTarget()
+    {
+        EnemyTile[] enemies = FindObjectsOfType<EnemyTile>();
+        Transform closestTarget = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (EnemyTile enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+
+            if (distanceToEnemy < closestDistance)
+            {
+                closestDistance = distanceToEnemy;
+                closestTarget = enemy.transform;
+            }
+        }
+
+        target = closestTarget;
+        isTargetWithinRange = (target != null && closestDistance <= chaseRange);
+    }
+
+    public void MoveToTarget()
+    {
+        if (target != null)
+        {
+            navMeshAgent.SetDestination(target.position);
+        }
+    }
+
+    public void LookAtTarget()
+    {
+        if (target != null)
+        {
+            float targetDistance = Vector3.Distance(transform.position, target.position);
+
+            target.LookAt(target);
+
+            if (targetDistance < chaseRange)
+            {
+                Attack(true);
+            }
+            else
+            {
+                Attack(false);
+            }
+        }
+    }
+
+    void Attack(bool isActive)
+    {
+        Debug.Log("Attack");
     }
 }

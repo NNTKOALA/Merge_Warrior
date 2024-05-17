@@ -10,7 +10,6 @@ public class Warrior : Character
     protected override void Start()
     {
         base.Start();
-
         rb = GetComponent<Rigidbody>();
     }
 
@@ -23,3 +22,4 @@ public class Warrior : Character
         }
     }
 }
+

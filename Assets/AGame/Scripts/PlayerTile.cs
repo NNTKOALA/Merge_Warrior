@@ -45,7 +45,7 @@ public class PlayerTile : MonoBehaviour
     {
         foreach (CharacterPrefabData characterPrefabData in characterPrefabs)
         {
-            if (characterPrefabData.characterType == type && characterPrefabData.characterLevel == level + 1)
+            if (characterPrefabData.characterType == type && characterPrefabData.characterLevel == level)
             {
                 return characterPrefabData.characterPrefab;
             }

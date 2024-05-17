@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3355329159775739799}
   - component: {fileID: 6176658523670863930}
   - component: {fileID: -6799929625618677045}
-  - component: {fileID: 4685830201520352882}
+  - component: {fileID: -4057792421460493631}
   - component: {fileID: 8614791633285993973}
   m_Layer: 0
   m_Name: Archer LV2
@@ -100,24 +100,25 @@ MonoBehaviour:
   damage: 20
   charLevel: 1
   charType: 1
+  turnSpeed: 5
+  chaseRange: 22
   characterLayer:
     serializedVersion: 2
     m_Bits: 0
   rb: {fileID: 19339304550260265}
---- !u!114 &4685830201520352882
+--- !u!114 &-4057792421460493631
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974826980912959812}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a325bd32d8d7b48438a728631d7b773f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4439a2e724d555c41af3551734f96467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 5
-  chaseRange: 22
+  allowedArea: {fileID: 0}
 --- !u!195 &8614791633285993973
 NavMeshAgent:
   m_ObjectHideFlags: 0
