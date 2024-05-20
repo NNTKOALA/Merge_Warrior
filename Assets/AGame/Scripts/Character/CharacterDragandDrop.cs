@@ -26,6 +26,7 @@ public class CharacterDragandDrop : MonoBehaviour
             return;
 
         offset = GetMousePos() - transform.position;
+        currentTile = GetComponent<PlayerTile>();
     }
 
     private void OnMouseDrag()

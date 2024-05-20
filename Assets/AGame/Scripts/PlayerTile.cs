@@ -6,16 +6,25 @@ using UnityEngine;
 public class PlayerTile : MonoBehaviour
 {
     [SerializeField] bool isPlaceable;
+
     [System.Serializable]
-    public class CharacterPrefabData
+    public class TileCharacterData
     {
-        public string characterName;
         public CharLevel characterLevel;
         public CharType characterType;
-        public GameObject characterPrefab;
     }
 
-    public List<CharacterPrefabData> characterPrefabs = new List<CharacterPrefabData>();
+    public TileCharacterData characterData;
+    private GameObject currentCharacter = null;
+    public Transform CurrentCharacterTF
+    {
+        get
+        {
+            if (currentCharacter == null) return null;
+
+            return currentCharacter.transform;
+        }
+    }
 
     private Renderer renderer;
     private Color originalColor;
@@ -24,7 +33,7 @@ public class PlayerTile : MonoBehaviour
     {
         get
         {
-            return isPlaceable;
+            return characterData == null;
         }
     }
 
@@ -33,24 +42,18 @@ public class PlayerTile : MonoBehaviour
     {
         renderer = GetComponent<Renderer>();
         originalColor = renderer.material.color;
+
+        if (characterData.characterType != CharType.None)
+        {
+            GameObject prefab = CharacterData.Instance.GetCharacterPrefab(characterData.characterType, characterData.characterLevel);
+            currentCharacter = Instantiate(prefab, transform.position, Quaternion.identity);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    }
-
-    public GameObject GetCharacterPrefab(CharType type, CharLevel level)
-    {
-        foreach (CharacterPrefabData characterPrefabData in characterPrefabs)
-        {
-            if (characterPrefabData.characterType == type && characterPrefabData.characterLevel == level)
-            {
-                return characterPrefabData.characterPrefab;
-            }
-        }
-        return null;
     }
 
     public void Highlight()
@@ -78,4 +81,30 @@ public class PlayerTile : MonoBehaviour
             collision.transform.SetParent(null);
         }
     }
+
+    public void ResetCharacterPosition()
+    {
+        currentCharacter.transform.position = transform.position;
+    }
+
+    public void ClearData()
+    {
+        characterData.characterType = CharType.None;
+    }
+
+    public void UpdateCharacter()
+    {
+        if (currentCharacter != null)
+        {
+            Debug.Log("Destroy Character");
+            Destroy(currentCharacter);
+        }
+        currentCharacter = null;
+
+        if (characterData.characterType == CharType.None) return;
+
+        GameObject prefab = CharacterData.Instance.GetCharacterPrefab(characterData.characterType, characterData.characterLevel);
+        currentCharacter = Instantiate(prefab, transform.position, Quaternion.identity);
+    }
 }
+

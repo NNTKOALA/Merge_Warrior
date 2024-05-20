@@ -1,5 +1,6 @@
 public enum CharType
 {
+    None,
     Warrior,
     Archer
 }
