@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Warrior : Character
 {
@@ -16,6 +17,15 @@ public class Warrior : Character
     // Update is called once per frame
     protected override void Update()
     {
+        //base.Update();
+
+        /*FindClosestTarget();
+        if (target != null && isTargetWithinRange)
+        {
+            MoveToTarget();
+            LookAtTarget();
+        }*/
+
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             TakeDamage(5);

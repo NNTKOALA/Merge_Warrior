@@ -22,7 +22,7 @@ public class CharacterDragandDrop : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (gameObject.tag == "Enemy")
+        if (gameObject.tag == "Enemy" && gameObject.tag == "EnemyTile")
             return;
 
         offset = GetMousePos() - transform.position;
@@ -31,7 +31,7 @@ public class CharacterDragandDrop : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (gameObject.tag == "Enemy")
+        if (gameObject.tag == "Enemy" && gameObject.tag == "EnemyTile")
             return;
 
         Vector3 mouseWorldPos = GetMousePos();
@@ -60,7 +60,7 @@ public class CharacterDragandDrop : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (gameObject.tag == "Enemy")
+        if (gameObject.tag == "Enemy" && gameObject.tag == "EnemyTile")
             return;
 
         if (currentTile != null)

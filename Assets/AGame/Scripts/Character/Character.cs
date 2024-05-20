@@ -18,44 +18,35 @@ public class Character : MonoBehaviour
     public LayerMask characterLayer;
 
     private NavMeshAgent navMeshAgent;
-    private Transform target;
-    private bool isTargetWithinRange;
+    protected Transform target;
+    protected bool isTargetWithinRange;
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
-    private bool isMoving = false;
 
-    /*    protected int maxHealth = 100;
-        protected int currentHealth;
-        public GameObject healthBarPrefab;
-        private HealthBar healthBar;*/
+    protected int maxHealth = 100;
+    protected int currentHealth;
+    public GameObject healthBarPrefab;
+    private HealthBar healthBar;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         isDead = false;
-        ChangeAnim("idle");
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-        /*        currentHealth = maxHealth;
-                GameObject hb = Instantiate(healthBarPrefab, transform);
-                hb.transform.localPosition = new Vector3(0, 2, 0);
-                healthBar = hb.GetComponent<HealthBar>();
-                healthBar.SetMaxHealth(maxHealth);*/
+        currentHealth = maxHealth;
+        GameObject hb = Instantiate(healthBarPrefab, transform);
+        hb.transform.localPosition = new Vector3(0, 2, 0);
+        healthBar = hb.GetComponentInChildren<HealthBar>();
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
         if (isDead) return;
-
-        FindClosestTarget();
-        if (target != null && isTargetWithinRange)
-        {
-            MoveToTarget();
-            LookAtTarget();
-        }
     }
 
     protected void ChangeAnim(string animName)
@@ -66,8 +57,6 @@ public class Character : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(animName))
             {
-                Debug.Log("play anim " + animName);
-
                 if (!string.IsNullOrEmpty(currentAnim))
                 {
                     anim.ResetTrigger(currentAnim);
@@ -85,10 +74,9 @@ public class Character : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        //healthBar.SetHealth(currentHealth);
+        healthBar.SetHealth(health);
         if (health <= 0)
         {
-            Debug.Log("Die");
             OnDead();
         }
     }
@@ -97,6 +85,11 @@ public class Character : MonoBehaviour
     {
         isDead = true;
         ChangeAnim("die");
+    }
+
+    public void OnWin()
+    {
+        ChangeAnim("win");
     }
 
     public int GetHealth()
@@ -112,22 +105,6 @@ public class Character : MonoBehaviour
     public CharType GetCharType()
     {
         return charType;
-    }
-
-    public bool CheckOnTile(Vector3 tilePosition)
-    {
-        RaycastHit hit;
-        bool isHit = Physics.Raycast(tilePosition + Vector3.up, Vector3.down, out hit, 2f, characterLayer);
-
-        return isHit;
-    }
-
-    public void UpdateHealthBarColor(Color color)
-    {
-/*        if (healthBar != null)
-        {
-            healthBar.SetColor(color);
-        }*/
     }
 
     public void FindClosestTarget()
@@ -155,9 +132,12 @@ public class Character : MonoBehaviour
     {
         if (target != null)
         {
-            isMoving = true;
-            ChangeAnim("move");
+            anim.SetBool("isMoving", true);
             navMeshAgent.SetDestination(target.position);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
         }
     }
 
@@ -171,18 +151,13 @@ public class Character : MonoBehaviour
 
             if (targetDistance < chaseRange)
             {
-                Attack(true);
-            }
-            else
-            {
-                Attack(false);
+                Attack();
             }
         }
     }
 
-    void Attack(bool isActive)
+    void Attack()
     {
-        Debug.Log("Attack");
         ChangeAnim("attack");
     }
 

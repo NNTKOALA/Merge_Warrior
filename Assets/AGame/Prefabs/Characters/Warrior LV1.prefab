@@ -104,6 +104,7 @@ MonoBehaviour:
   characterLayer:
     serializedVersion: 2
     m_Bits: 64
+  healthBarPrefab: {fileID: 3004730373327838904, guid: 1e175dd626dca9b4d9cf441dc07e6095, type: 3}
   rb: {fileID: 2159949974124907878}
 --- !u!195 &-7977517034300254511
 NavMeshAgent:
@@ -112,7 +113,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9059267165606634248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5

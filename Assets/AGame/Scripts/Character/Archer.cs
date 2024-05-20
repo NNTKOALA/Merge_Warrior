@@ -17,6 +17,14 @@ public class Archer : Character
     // Update is called once per frame
     protected override void Update()
     {
+        //base.Update();
+
+        /*FindClosestTarget();
+        if (target != null && isTargetWithinRange)
+        {           
+            LookAtTarget();
+        }*/
+
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             TakeDamage(5);
