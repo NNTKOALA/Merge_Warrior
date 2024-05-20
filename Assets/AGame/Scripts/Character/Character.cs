@@ -23,16 +23,18 @@ public class Character : MonoBehaviour
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
+    private bool isMoving = false;
 
-/*    protected int maxHealth = 100;
-    protected int currentHealth;
-    public GameObject healthBarPrefab;
-    private HealthBar healthBar;*/
+    /*    protected int maxHealth = 100;
+        protected int currentHealth;
+        public GameObject healthBarPrefab;
+        private HealthBar healthBar;*/
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         isDead = false;
+        ChangeAnim("idle");
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -95,7 +97,6 @@ public class Character : MonoBehaviour
     {
         isDead = true;
         ChangeAnim("die");
-        Debug.Log("Die");
     }
 
     public int GetHealth()
@@ -154,6 +155,8 @@ public class Character : MonoBehaviour
     {
         if (target != null)
         {
+            isMoving = true;
+            ChangeAnim("move");
             navMeshAgent.SetDestination(target.position);
         }
     }
@@ -180,5 +183,12 @@ public class Character : MonoBehaviour
     void Attack(bool isActive)
     {
         Debug.Log("Attack");
+        ChangeAnim("attack");
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 }

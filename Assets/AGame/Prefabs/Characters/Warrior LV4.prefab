@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5568521659173420722}
   - component: {fileID: 1467979682193236599}
   - component: {fileID: -5997007868125971584}
-  - component: {fileID: 8005336082979907870}
   - component: {fileID: -2035015453908639215}
   m_Layer: 0
   m_Name: Warrior LV4
@@ -104,20 +103,8 @@ MonoBehaviour:
   chaseRange: 10
   characterLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   rb: {fileID: 4005700994958904574}
---- !u!114 &8005336082979907870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568535548750144256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4439a2e724d555c41af3551734f96467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &-2035015453908639215
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -125,7 +112,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2568535548750144256}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5

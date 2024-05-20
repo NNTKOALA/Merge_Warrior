@@ -8,7 +8,7 @@ public class PlayerTile : MonoBehaviour
     [SerializeField] bool isPlaceable;
 
     [System.Serializable]
-    public class TileCharacterData
+    public struct TileCharacterData
     {
         public CharLevel characterLevel;
         public CharType characterType;
@@ -33,7 +33,7 @@ public class PlayerTile : MonoBehaviour
     {
         get
         {
-            return characterData == null;
+            return characterData.characterType == CharType.None;
         }
     }
 

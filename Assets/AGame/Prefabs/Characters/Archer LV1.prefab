@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1940893154364870867}
   - component: {fileID: 5555197704101850124}
   - component: {fileID: 4184979205557460140}
-  - component: {fileID: 4352956761413344258}
   - component: {fileID: 7399343562292375266}
   m_Layer: 0
   m_Name: Archer LV1
@@ -104,20 +103,8 @@ MonoBehaviour:
   chaseRange: 22
   characterLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   rb: {fileID: 2978416865913998257}
---- !u!114 &4352956761413344258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602900353037445276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4439a2e724d555c41af3551734f96467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &7399343562292375266
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -125,7 +112,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5602900353037445276}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
