@@ -17,19 +17,24 @@ public class Warrior : Character
     // Update is called once per frame
     protected override void Update()
     {
-        //base.Update();
+        base.Update();
 
-        /*FindClosestTarget();
+        FindClosestTarget();
         if (target != null && isTargetWithinRange)
         {
             MoveToTarget();
             LookAtTarget();
-        }*/
+        }
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             TakeDamage(5);
         }
+    }
+
+    protected override void Attack()
+    {
+        base.Attack();
     }
 }
 

@@ -12,8 +12,8 @@ public class Character : MonoBehaviour
     [SerializeField] protected int damage;
     [SerializeField] CharLevel charLevel;
     [SerializeField] CharType charType;
-    [SerializeField] public float turnSpeed = 5f;
-    [SerializeField] float chaseRange = 10f;
+    [SerializeField] protected float turnSpeed = 5f;
+    [SerializeField] protected float chaseRange = 10f;
 
     public LayerMask characterLayer;
 
@@ -85,6 +85,8 @@ public class Character : MonoBehaviour
     {
         isDead = true;
         ChangeAnim("die");
+        healthBar.gameObject.SetActive(false);
+        Destroy(gameObject, .1f);
     }
 
     public void OnWin()
@@ -109,15 +111,15 @@ public class Character : MonoBehaviour
 
     public void FindClosestTarget()
     {
-        EnemyTile[] enemies = FindObjectsOfType<EnemyTile>();
+        Character[] enemies = FindObjectsOfType<Character>();
         Transform closestTarget = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach (EnemyTile enemy in enemies)
+        foreach (Character enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (distanceToEnemy < closestDistance)
+            if (distanceToEnemy < closestDistance && enemy.CompareTag("Enemy"))
             {
                 closestDistance = distanceToEnemy;
                 closestTarget = enemy.transform;
@@ -156,7 +158,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    void Attack()
+    protected virtual void Attack()
     {
         ChangeAnim("attack");
     }
