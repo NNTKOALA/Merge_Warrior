@@ -166,4 +166,9 @@ public class Character : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
+
+    public virtual void OnNewGame()
+    {
+
+    }
 }
