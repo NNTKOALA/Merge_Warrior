@@ -19,17 +19,13 @@ public class Warrior : Character
     {
         base.Update();
 
-        FindClosestTarget();
-        if (target != null && isTargetWithinRange)
+        if (target == null || !isTargetWithinRange)
         {
-            MoveToTarget();
-            LookAtTarget();
+            FindClosestTarget();
         }
 
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            TakeDamage(5);
-        }
+        MoveToTarget();
+        LookAtTarget();
     }
 
     protected override void Attack()

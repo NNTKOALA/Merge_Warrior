@@ -117,6 +117,11 @@ public class Character : MonoBehaviour
 
         foreach (Character enemy in enemies)
         {
+            if (enemy == this)
+            {
+                continue;
+            }
+
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
             if (distanceToEnemy < closestDistance && enemy.CompareTag("Enemy"))
@@ -149,7 +154,8 @@ public class Character : MonoBehaviour
         {
             float targetDistance = Vector3.Distance(transform.position, target.position);
 
-            target.LookAt(target);
+            transform.LookAt(target);
+            Debug.Log("Character name " + name + " Target lock " + target);
 
             if (targetDistance < chaseRange)
             {
@@ -169,7 +175,7 @@ public class Character : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 
-    public virtual void OnNewGame()
+    protected virtual void OnNewGame()
     {
 
     }

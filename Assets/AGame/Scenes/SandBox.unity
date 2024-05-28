@@ -2663,6 +2663,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 87385706}
+    - target: {fileID: -6799929625618677045, guid: 4d4c2fe8bc50cfc44aa1a5d519dd6b0b, type: 3}
+      propertyPath: chaseRange
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 1974826980912959812, guid: 4d4c2fe8bc50cfc44aa1a5d519dd6b0b, type: 3}
       propertyPath: m_Name
       value: Archer LV2 (1)

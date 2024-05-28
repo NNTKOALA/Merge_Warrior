@@ -21,16 +21,11 @@ public class Archer : Character
     {
         base.Update();
 
-        FindClosestTarget();
-        if (target != null && isTargetWithinRange)
+        if (target == null || !isTargetWithinRange)
         {
-            LookAtTarget();
+            FindClosestTarget();
         }
-
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            TakeDamage(5);
-        }
+        LookAtTarget();
     }
 
     protected override void Attack()
