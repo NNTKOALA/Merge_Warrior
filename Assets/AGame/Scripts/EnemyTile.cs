@@ -12,7 +12,7 @@ public class EnemyTile : MonoBehaviour
             Character character = other.GetComponent<Character>();
             if (character != null)
             {
-                //character.UpdateHealthBarColor(Color.red);
+                // character.UpdateHealthBarColor(Color.red);
             }
         }
     }

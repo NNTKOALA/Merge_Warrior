@@ -31,6 +31,16 @@ public class Warrior : Character
     protected override void Attack()
     {
         base.Attack();
+        AttackHitEvent();
+    }
+
+    private void AttackHitEvent()
+    {
+        if (target == null)
+        {
+            return;
+        }
+        target.GetComponent<Character>().TakeDamage(damage);
     }
 }
 

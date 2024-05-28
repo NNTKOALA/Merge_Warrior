@@ -110,3 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49d4f6474c54d34187fe74ab01f4180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilePrefab: {fileID: 3313560540790540645}
+  rows: 3
+  columns: 5

@@ -95,12 +95,12 @@ MonoBehaviour:
   playerTile:
     serializedVersion: 2
     m_Bits: 64
-  health: 10
+  health: 20
   damage: 5
   charLevel: 0
-  charType: 0
+  charType: 1
   turnSpeed: 5
-  chaseRange: 10
+  chaseRange: 1
   characterLayer:
     serializedVersion: 2
     m_Bits: 64
