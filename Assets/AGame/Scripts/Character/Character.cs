@@ -29,7 +29,6 @@ public class Character : MonoBehaviour
     public GameObject healthBarPrefab;
     private HealthBar healthBar;
 
-    // Start is called before the first frame update
     protected virtual void Start()
     {
         isDead = false;
@@ -43,7 +42,6 @@ public class Character : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
         if (isDead) return;
@@ -51,7 +49,7 @@ public class Character : MonoBehaviour
 
     protected void ChangeAnim(string animName)
     {
-        if (anim == null) return; 
+        if (anim == null) return;
 
         if (currentAnim != animName)
         {
@@ -117,14 +115,14 @@ public class Character : MonoBehaviour
 
         foreach (Character enemy in enemies)
         {
-            if (enemy == this)
+            if (enemy == this || enemy.tag == this.tag)
             {
                 continue;
             }
 
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (distanceToEnemy < closestDistance && enemy.CompareTag("Enemy"))
+            if (distanceToEnemy < closestDistance)
             {
                 closestDistance = distanceToEnemy;
                 closestTarget = enemy.transform;
@@ -154,8 +152,9 @@ public class Character : MonoBehaviour
         {
             float targetDistance = Vector3.Distance(transform.position, target.position);
 
-            transform.LookAt(target);
-            Debug.Log("Character name " + name + " Target lock " + target);
+            Vector3 direction = (target.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
 
             if (targetDistance < chaseRange)
             {

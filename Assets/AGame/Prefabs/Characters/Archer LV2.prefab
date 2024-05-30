@@ -106,6 +106,9 @@ MonoBehaviour:
     m_Bits: 64
   healthBarPrefab: {fileID: 3004730373327838904, guid: 1e175dd626dca9b4d9cf441dc07e6095, type: 3}
   rb: {fileID: 19339304550260265}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!195 &8614791633285993973
 NavMeshAgent:
   m_ObjectHideFlags: 0

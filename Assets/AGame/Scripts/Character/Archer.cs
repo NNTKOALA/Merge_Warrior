@@ -9,6 +9,8 @@ public class Archer : Character
 {
     [SerializeField] Rigidbody rb;
 
+    public LayerMask targetLayer;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -24,32 +26,43 @@ public class Archer : Character
         if (target == null || !isTargetWithinRange)
         {
             FindClosestTarget();
+            LookAtTarget();
         }
-        LookAtTarget();
     }
 
     protected override void Attack()
     {
-        base.Attack();
-
+        base.Attack();        
         ProcessRayCast();
     }
 
     private void ProcessRayCast()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(rb.transform.position, rb.transform.forward, out hit, chaseRange))
+        if (rb == null)
         {
-            Character target = hit.transform.GetComponent<Character>();
-            if (target == null)
+            Debug.LogError("Rigidbody is not assigned.");
+            return;
+        }
+
+        RaycastHit hit;
+        Vector3 rayOrigin = rb.transform.position;
+        Vector3 rayDirection = rb.transform.forward;
+
+        if (Physics.Raycast(rayOrigin, rayDirection, out hit, chaseRange, characterLayer))
+        {
+            if (hit.collider.gameObject != gameObject)
             {
-                return;
+                Character target = hit.transform.GetComponent<Character>();
+                if (target != null && target.tag != this.tag)
+                {
+                    target.TakeDamage(damage);
+                    Debug.Log(name + " attacked " + target.name + " for " + damage + " damage.");
+                }
             }
-            target.TakeDamage(damage);
         }
         else
         {
-            return;
+            Debug.Log("No target hit within range.");
         }
     }
 }
