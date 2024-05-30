@@ -3550,7 +3550,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1951469007}
         m_TargetAssemblyTypeName: BuyManager, Assembly-CSharp
         m_MethodName: SpawnWarriorUnit
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3611,7 +3611,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warriorPrefab: {fileID: 9059267165606634248, guid: d1982aec7ee2f5849b3976234b77a50b, type: 3}
   archerPrefab: {fileID: 5602900353037445276, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
-  spawnPoint: {fileID: 2000931474623123490}
+  spawnPoints: []
+  isCellOccupied: 
+  buyWarriorButton: {fileID: 1951469004}
+  buyArcherButton: {fileID: 1952787815}
 --- !u!1 &1952787813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3763,7 +3766,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warriorPrefab: {fileID: 9059267165606634248, guid: d1982aec7ee2f5849b3976234b77a50b, type: 3}
   archerPrefab: {fileID: 5602900353037445276, guid: d2e0c93f3deeed7478401fabb1bb587c, type: 3}
-  spawnPoint: {fileID: 2000931474623123490}
+  spawnPoints: []
+  isCellOccupied: 
+  buyWarriorButton: {fileID: 1951469004}
+  buyArcherButton: {fileID: 1952787815}
 --- !u!1 &2060139660
 GameObject:
   m_ObjectHideFlags: 0
