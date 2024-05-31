@@ -6,6 +6,8 @@ public class BattleManager : MonoBehaviour
 {
     [SerializeField] GameObject inGameUI;
 
+    private Character character;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +26,7 @@ public class BattleManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        character.StartBattle();
     }
 }

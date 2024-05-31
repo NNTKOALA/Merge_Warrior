@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class BuyManager : MonoBehaviour
 {
-    public GameObject warriorPrefab;
-    public GameObject archerPrefab;
+    public GameObject tilePrefab;
 
-    public Transform[] spawnPoints;
+    public List<PlayerTile> playerTileList;
 
-    public bool[] isCellOccupied;
+    private int cellIndex;
 
     bool isBattleStarted = false;
 
@@ -20,7 +19,7 @@ public class BuyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -29,67 +28,43 @@ public class BuyManager : MonoBehaviour
 
     }
 
-    public void SpawnWarriorUnit(int cellIndex)
+    public void SpawnWarriorUnit()
     {
-        if (isBattleStarted) return;
+        cellIndex = FindAvailableIndex();
+        if (cellIndex < 0) return;
 
-        if (cellIndex < 0 || cellIndex >= spawnPoints.Length)
-        {
-            Debug.LogError("Invalid cell index");
-            return;
-        }
-
-        if (isCellOccupied[cellIndex])
-        {
-            Debug.LogError("Cell is already occupied");
-            return;
-        }
-
-        Debug.Log("Create Warrior Lv1");
-        Instantiate(warriorPrefab, spawnPoints[cellIndex].position, spawnPoints[cellIndex].rotation);
-        isCellOccupied[cellIndex] = true;
-
-        UpdateBuyButtons();
+        playerTileList[cellIndex].characterData.characterType = CharType.Warrior;
+        playerTileList[cellIndex].characterData.characterLevel = CharLevel.Lv1;
+        playerTileList[cellIndex].UpdateCharacter();
+        // UpdateBuyButtons();
     }
 
-    public void SpawnArcherUnit(int cellIndex)
+    public void SpawnArcherUnit()
     {
-        if (isBattleStarted) return;
+        cellIndex = FindAvailableIndex();
+        if (cellIndex < 0) return;
 
-        if (cellIndex < 0 || cellIndex >= spawnPoints.Length)
-        {
-            Debug.LogError("Invalid cell index");
-            return;
-        }
-
-        if (isCellOccupied[cellIndex])
-        {
-            Debug.LogError("Cell is already occupied");
-            return;
-        }
-
-        Debug.Log("Create Archer Lv1");
-        Instantiate(archerPrefab, spawnPoints[cellIndex].position, spawnPoints[cellIndex].rotation);
-        isCellOccupied[cellIndex] = true;
-
-        UpdateBuyButtons();
+        playerTileList[cellIndex].characterData.characterType = CharType.Archer;
+        playerTileList[cellIndex].characterData.characterLevel = CharLevel.Lv1;
+        playerTileList[cellIndex].UpdateCharacter();
+        // UpdateBuyButtons();
     }
 
     public void UpdateBuyButtons()
     {
         if (isBattleStarted) return;
+    }
 
-        bool anyCellFree = false;
-        foreach (bool occupied in isCellOccupied)
+    private int FindAvailableIndex()
+    {
+        for (int i = 0; i < playerTileList.Count; i++)
         {
-            if (!occupied)
+            if (playerTileList[i].characterData.characterType == CharType.None)
             {
-                anyCellFree = true;
-                break;
+                return i;
             }
         }
 
-        buyWarriorButton.interactable = anyCellFree;
-        buyArcherButton.interactable = anyCellFree;
+        return -1;
     }
 }

@@ -23,6 +23,7 @@ public class Character : MonoBehaviour
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
+    public bool isStartBattle { get; set; } = false;
 
     protected int maxHealth = 100;
     protected int currentHealth;
@@ -32,6 +33,7 @@ public class Character : MonoBehaviour
     protected virtual void Start()
     {
         isDead = false;
+        isStartBattle = false;
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -177,5 +179,10 @@ public class Character : MonoBehaviour
     protected virtual void OnNewGame()
     {
 
+    }
+
+    public void StartBattle()
+    {
+        isStartBattle = true;
     }
 }
