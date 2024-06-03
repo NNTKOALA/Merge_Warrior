@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     [SerializeField] LayerMask playerTile;
     [SerializeField] protected int health;
     [SerializeField] protected int damage;
+    [SerializeField] protected int attackRange;
     [SerializeField] CharLevel charLevel;
     [SerializeField] CharType charType;
     [SerializeField] protected float turnSpeed = 5f;
@@ -23,17 +24,19 @@ public class Character : MonoBehaviour
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
-    public bool isStartBattle { get; set; } = false;
+    public bool startBattle { get; set; } = false;
 
     protected int maxHealth = 100;
     protected int currentHealth;
     public GameObject healthBarPrefab;
     private HealthBar healthBar;
 
+    private UIManager uiManager;
+
     protected virtual void Start()
     {
         isDead = false;
-        isStartBattle = false;
+        if (startBattle == false) return;
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -42,6 +45,10 @@ public class Character : MonoBehaviour
         hb.transform.localPosition = new Vector3(0, 2, 0);
         healthBar = hb.GetComponentInChildren<HealthBar>();
         healthBar.SetMaxHealth(maxHealth);
+        if (gameObject.tag == "Enemy")
+        {
+            healthBar.SetHealthBarColor(Color.red);
+        }
     }
 
     protected virtual void Update()
@@ -81,6 +88,16 @@ public class Character : MonoBehaviour
         }
     }
 
+    protected virtual void OnIdle()
+    {
+        ChangeAnim("idle");
+    }
+
+    protected virtual void OnAttack()
+    {
+        ChangeAnim("attack");
+    }
+
     public void OnDead()
     {
         isDead = true;
@@ -92,6 +109,12 @@ public class Character : MonoBehaviour
     public void OnWin()
     {
         ChangeAnim("win");
+        uiManager.SwitchToWinUI();
+    }
+
+    public void OnLose()
+    {
+        uiManager.SwitchToLoseUI();
     }
 
     public int GetHealth()
@@ -158,16 +181,15 @@ public class Character : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
 
-            if (targetDistance < chaseRange)
+            if (targetDistance < attackRange)
             {
-                Attack();
+                OnAttack();
+            }
+            else
+            {
+                OnIdle();
             }
         }
-    }
-
-    protected virtual void Attack()
-    {
-        ChangeAnim("attack");
     }
 
     void OnDrawGizmosSelected()
@@ -179,10 +201,5 @@ public class Character : MonoBehaviour
     protected virtual void OnNewGame()
     {
 
-    }
-
-    public void StartBattle()
-    {
-        isStartBattle = true;
     }
 }

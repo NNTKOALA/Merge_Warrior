@@ -97,6 +97,7 @@ MonoBehaviour:
     m_Bits: 64
   health: 10
   damage: 10
+  attackRange: 22
   charLevel: 0
   charType: 2
   turnSpeed: 5

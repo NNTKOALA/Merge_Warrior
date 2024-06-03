@@ -25,22 +25,28 @@ public class Archer : Character
 
         if (target == null || !isTargetWithinRange)
         {
-            FindClosestTarget();
+            FindClosestTarget();           
+        }
+        else
+        {          
             LookAtTarget();
+            OnAttack();
         }
     }
 
-    protected override void Attack()
+    protected override void OnAttack()
     {
-        base.Attack();        
-        ProcessRayCast();
+        base.OnAttack();  
+        if (startBattle == true)
+        {
+            ProcessRayCast();
+        }
     }
 
     private void ProcessRayCast()
     {
         if (rb == null)
         {
-            Debug.LogError("Rigidbody is not assigned.");
             return;
         }
 
@@ -56,13 +62,8 @@ public class Archer : Character
                 if (target != null && target.tag != this.tag)
                 {
                     target.TakeDamage(damage);
-                    Debug.Log(name + " attacked " + target.name + " for " + damage + " damage.");
                 }
             }
-        }
-        else
-        {
-            Debug.Log("No target hit within range.");
         }
     }
 }

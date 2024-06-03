@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] GameObject inGameUI;
     [SerializeField] GameObject mainMenuUI;
+    [SerializeField] GameObject settingUI;
+    [SerializeField] GameObject listCharacterUI;
+    [SerializeField] GameObject winUI;
+    [SerializeField] GameObject loseUI;
 
     public void Awake()
     {
@@ -38,6 +42,10 @@ public class UIManager : MonoBehaviour
     {
         inGameUI.SetActive(false);
         mainMenuUI.SetActive(false);
+        settingUI.SetActive(false);
+        listCharacterUI.SetActive(false);
+        winUI.SetActive(false);
+        loseUI.SetActive(false);
     }
 
     public void SwitchTo(GameObject ui)
@@ -55,5 +63,25 @@ public class UIManager : MonoBehaviour
     public void SwitchToIngameUI()
     {
         SwitchTo(inGameUI);
+    }
+
+    public void SwitchToSettingUI()
+    {
+        SwitchTo(settingUI);
+    }
+
+    public void SwitchToListUI()
+    {
+        SwitchTo(listCharacterUI);
+    }
+
+    public void SwitchToWinUI()
+    {
+        SwitchTo(winUI);
+    }
+
+    public void SwitchToLoseUI()
+    {
+        SwitchTo(loseUI);
     }
 }

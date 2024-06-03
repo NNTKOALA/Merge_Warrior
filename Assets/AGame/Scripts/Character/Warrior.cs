@@ -22,15 +22,17 @@ public class Warrior : Character
         if (target == null || !isTargetWithinRange)
         {
             FindClosestTarget();
-            LookAtTarget();
+            MoveToTarget();
         }
-
-        MoveToTarget();        
+        else
+        {
+            LookAtTarget();
+        }      
     }
 
-    protected override void Attack()
+    protected override void OnAttack()
     {
-        base.Attack();       
+        base.OnAttack();       
         AttackHitEvent();
     }
 

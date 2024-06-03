@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Slider slider;
+    public Image fillImage;
+
+    public void Start()
+    {
+        fillImage = GetComponent<Image>();
+    }
 
     public void SetMaxHealth(int health)
     {
@@ -16,5 +22,10 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(int health)
     {
         slider.value = health;
+    }
+
+    public void SetHealthBarColor(Color newColor)
+    {
+        fillImage.color = newColor;
     }
 }
