@@ -19,15 +19,26 @@ public class Warrior : Character
     {
         base.Update();
 
-        if (target == null || !isTargetWithinRange)
+        if (!isAttack)
+        {
+            return;
+        }
+
+        if (target == null && isAttack == false)
         {
             FindClosestTarget();
-            MoveToTarget();
         }
         else
         {
+            MoveToTarget();
             LookAtTarget();
-        }      
+
+            if (Time.time - lastAttackTime >= attackCooldown)
+            {
+                OnAttack();
+                lastAttackTime = Time.time;
+            }
+        }
     }
 
     protected override void OnAttack()
@@ -45,4 +56,3 @@ public class Warrior : Character
         target.GetComponent<Character>().TakeDamage(damage);
     }
 }
-

@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class EnemyTile : MonoBehaviour
 {
-    private HealthBar healthBar;
-
     [System.Serializable]
     public struct TileCharacterData
     {

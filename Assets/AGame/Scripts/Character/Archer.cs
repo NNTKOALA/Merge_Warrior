@@ -23,24 +23,31 @@ public class Archer : Character
     {
         base.Update();
 
-        if (target == null || !isTargetWithinRange)
+        if (!isAttack)
         {
-            FindClosestTarget();           
+            return;
+        }
+
+        if (target == null)
+        {
+            FindClosestTarget();
         }
         else
-        {          
+        {            
             LookAtTarget();
-            OnAttack();
+
+            if (Time.time - lastAttackTime >= attackCooldown)
+            {
+                OnAttack();
+                lastAttackTime = Time.time;
+            }
         }
     }
 
     protected override void OnAttack()
     {
         base.OnAttack();  
-        if (startBattle == true)
-        {
-            ProcessRayCast();
-        }
+        ProcessRayCast();
     }
 
     private void ProcessRayCast()

@@ -97,11 +97,11 @@ MonoBehaviour:
     m_Bits: 64
   health: 20
   damage: 5
-  attackRange: 1
+  attackRange: 2
   charLevel: 0
   charType: 1
   turnSpeed: 5
-  chaseRange: 5
+  chaseRange: 6
   characterLayer:
     serializedVersion: 2
     m_Bits: 64

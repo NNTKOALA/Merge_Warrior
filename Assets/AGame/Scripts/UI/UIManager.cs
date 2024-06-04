@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject listCharacterUI;
     [SerializeField] GameObject winUI;
     [SerializeField] GameObject loseUI;
+    [SerializeField] TextMeshProUGUI moneyCount;
 
     public void Awake()
     {
@@ -46,6 +48,11 @@ public class UIManager : MonoBehaviour
         listCharacterUI.SetActive(false);
         winUI.SetActive(false);
         loseUI.SetActive(false);
+    }
+
+    public void UpdateMoney()
+    {
+        moneyCount.text = GameManager.Instance.money.ToString();
     }
 
     public void SwitchTo(GameObject ui)

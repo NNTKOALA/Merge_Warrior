@@ -16,6 +16,9 @@ public class Character : MonoBehaviour
     [SerializeField] protected float turnSpeed = 5f;
     [SerializeField] protected float chaseRange = 10f;
 
+    protected float attackCooldown = 1f;
+    protected float lastAttackTime = 0f;
+
     public LayerMask characterLayer;
 
     private NavMeshAgent navMeshAgent;
@@ -24,7 +27,7 @@ public class Character : MonoBehaviour
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
-    public bool startBattle { get; set; } = false;
+    public bool isAttack { get; set; } = false;
 
     protected int maxHealth = 100;
     protected int currentHealth;
@@ -36,7 +39,7 @@ public class Character : MonoBehaviour
     protected virtual void Start()
     {
         isDead = false;
-        if (startBattle == false) return;
+        isAttack = false;
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -136,7 +139,7 @@ public class Character : MonoBehaviour
     {
         Character[] enemies = FindObjectsOfType<Character>();
         Transform closestTarget = null;
-        float closestDistance = Mathf.Infinity;
+        float maxDistance = Mathf.Infinity;
 
         foreach (Character enemy in enemies)
         {
@@ -147,15 +150,14 @@ public class Character : MonoBehaviour
 
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (distanceToEnemy < closestDistance)
-            {
-                closestDistance = distanceToEnemy;
+            if (distanceToEnemy < maxDistance)
+            {               
                 closestTarget = enemy.transform;
+                maxDistance = distanceToEnemy;
             }
         }
 
         target = closestTarget;
-        isTargetWithinRange = (target != null && closestDistance <= chaseRange);
     }
 
     public void MoveToTarget()
@@ -201,5 +203,10 @@ public class Character : MonoBehaviour
     protected virtual void OnNewGame()
     {
 
+    }
+
+    protected virtual void StartFighting()
+    {
+        isAttack = true;
     }
 }
