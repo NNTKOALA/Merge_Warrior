@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject listCharacterUI;
     [SerializeField] GameObject winUI;
     [SerializeField] GameObject loseUI;
+    [SerializeField] GameObject warriorCardsUI;
+    [SerializeField] GameObject archerCardsUI;
     [SerializeField] TextMeshProUGUI moneyCount;
 
     public void Awake()
@@ -48,6 +50,8 @@ public class UIManager : MonoBehaviour
         listCharacterUI.SetActive(false);
         winUI.SetActive(false);
         loseUI.SetActive(false);
+        /*warriorCardsUI.SetActive(false);
+        archerCardsUI.SetActive(false);*/
     }
 
     public void UpdateMoney()
@@ -90,5 +94,15 @@ public class UIManager : MonoBehaviour
     public void SwitchToLoseUI()
     {
         SwitchTo(loseUI);
+    }
+
+    public void SwitchToWarriorCardUI()
+    {
+        SwitchTo(warriorCardsUI);
+    }
+
+    public void SwitchToArcherCardUI()
+    {
+        SwitchTo(archerCardsUI);
     }
 }

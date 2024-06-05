@@ -20,12 +20,12 @@ public class BuyManager : MonoBehaviour
     public TextMeshProUGUI priceText;
     private float currentPrice = 0;
     private const float priceIncreaseRate = 1.2f;
+    private int purchaseCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        UpdatePriceText();
-        UpdateBuyButtons();
+        
     }
 
     // Update is called once per frame
@@ -40,13 +40,15 @@ public class BuyManager : MonoBehaviour
         if (cellIndex < 0 || !GameManager.Instance.HasEnoughMoney(currentPrice)) return;
 
         GameManager.Instance.DeductMoney(currentPrice);
+        Debug.Log($"Purchased Warrior for {currentPrice} units.");
 
         playerTileList[cellIndex].characterData.characterType = CharType.Warrior;
         playerTileList[cellIndex].characterData.characterLevel = CharLevel.Lv1;
         playerTileList[cellIndex].UpdateCharacter();
 
-        UpdateBuyButtons();
+        purchaseCount++;
         UpdatePrice();
+        UpdateBuyButtons();
     }
 
     public void SpawnArcherUnit()
@@ -55,13 +57,15 @@ public class BuyManager : MonoBehaviour
         if (cellIndex < 0 || !GameManager.Instance.HasEnoughMoney(currentPrice)) return;
 
         GameManager.Instance.DeductMoney(currentPrice);
+        Debug.Log($"Purchased Archer for {currentPrice} units.");
 
         playerTileList[cellIndex].characterData.characterType = CharType.Archer;
         playerTileList[cellIndex].characterData.characterLevel = CharLevel.Lv1;
         playerTileList[cellIndex].UpdateCharacter();
 
-        UpdateBuyButtons();
+        purchaseCount++;
         UpdatePrice();
+        UpdateBuyButtons();
     }
 
     public void UpdateBuyButtons()
@@ -74,10 +78,15 @@ public class BuyManager : MonoBehaviour
         }
 
         bool hasAvailableIndex = FindAvailableIndex() >= 0;
-        bool hasEnoughMoney = GameManager.Instance.HasEnoughMoney(currentPrice);
 
-        buyWarriorButton.interactable = hasAvailableIndex && hasEnoughMoney;
-        buyArcherButton.interactable = hasAvailableIndex && hasEnoughMoney;
+        float warriorPrice = currentPrice;
+        float archerPrice = currentPrice;
+
+        bool hasEnoughMoneyForWarrior = GameManager.Instance.HasEnoughMoney(warriorPrice);
+        bool hasEnoughMoneyForArcher = GameManager.Instance.HasEnoughMoney(archerPrice);
+
+        buyWarriorButton.interactable = hasAvailableIndex && hasEnoughMoneyForWarrior;
+        buyArcherButton.interactable = hasAvailableIndex && hasEnoughMoneyForArcher;
     }
 
     private int FindAvailableIndex()
@@ -100,7 +109,18 @@ public class BuyManager : MonoBehaviour
 
     private void UpdatePrice()
     {
-        currentPrice = 120 + currentPrice * priceIncreaseRate;
+        if (purchaseCount == 0)
+        {
+            currentPrice = 0;
+        }
+        else if (purchaseCount == 1)
+        {
+            currentPrice = 120;
+        }
+        else
+        {
+            currentPrice *= priceIncreaseRate;
+        }
         UpdatePriceText();
     }
 
@@ -110,6 +130,7 @@ public class BuyManager : MonoBehaviour
         {
             GameManager.Instance.DeductMoney(currentPrice);
 
+            purchaseCount++;
             UpdatePrice();
             UpdateBuyButtons();
         }

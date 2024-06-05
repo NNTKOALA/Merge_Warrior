@@ -36,8 +36,6 @@ public class Character : MonoBehaviour
     public GameObject healthBarPrefab;
     private HealthBar healthBar;
 
-    private UIManager uiManager;
-
     protected virtual void Start()
     {
         isDead = false;
@@ -115,12 +113,12 @@ public class Character : MonoBehaviour
     public void OnWin()
     {
         ChangeAnim("win");
-        uiManager.SwitchToWinUI();
+        UIManager.Instance.SwitchToWinUI();
     }
 
     public void OnLose()
     {
-        uiManager.SwitchToLoseUI();
+        UIManager.Instance.SwitchToLoseUI();
     }
 
     public int GetHealth()

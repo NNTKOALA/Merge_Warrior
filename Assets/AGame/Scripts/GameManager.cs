@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     public float playerMoney = 200;
     public bool isPlaying;
+
+    public TextMeshProUGUI levelText;
+    public int playerLevel = 1;
 
     private void Awake()
     {
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         PauseGame();
         UIManager.Instance.UpdateMoney();
+        UpdateLevelText();
     }
 
     // Update is called once per frame
@@ -45,6 +50,12 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.SwitchToLoseUI();
         PauseGame();
+    }
+
+    public void NextLevel()
+    {
+        playerLevel++;
+        UpdateLevelText();
     }
 
     public void PauseGame()
@@ -104,6 +115,7 @@ public class GameManager : MonoBehaviour
         {
             playerMoney -= amount;
             UIManager.Instance.UpdateMoney();
+            Debug.Log("Bank balace" + playerMoney);
         }
     }
 
@@ -115,17 +127,24 @@ public class GameManager : MonoBehaviour
 
     public string FormatMoney(float amount)
     {
-        if (amount >= 1000000)
+        if (amount < 1000)
         {
-            return (amount / 1000000f).ToString("F0") + "M";
+            return Mathf.Round(amount).ToString("F0");
         }
-        else if (amount >= 1000)
+        else if (1000 <= amount && amount < 1000000)
         {
-            return (amount / 1000f).ToString("F0") + "K";
+            float value = Mathf.Round(amount / 100f) / 10;
+            return value.ToString(value % 1 == 0 ? "F0" : "F1") + "K";
         }
         else
         {
-            return amount.ToString("F0");
+            float value = Mathf.Round(amount / 100000f) / 10;
+            return value.ToString(value % 1 == 0 ? "F0" : "F1") + "M";
         }
+    }
+
+    public void UpdateLevelText()
+    {
+        levelText.text = $"Level {playerLevel}";
     }
 }
