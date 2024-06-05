@@ -29,6 +29,8 @@ public class Character : MonoBehaviour
     public bool isDead { get; set; } = false;
     public bool isAttack { get; set; } = false;
 
+    public bool isEnemy;
+
     protected int maxHealth = 100;
     protected int currentHealth;
     public GameObject healthBarPrefab;
@@ -40,6 +42,7 @@ public class Character : MonoBehaviour
     {
         isDead = false;
         isAttack = false;
+        OnIdle();
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -93,7 +96,7 @@ public class Character : MonoBehaviour
 
     protected virtual void OnIdle()
     {
-        ChangeAnim("idle");
+        anim.SetBool("isMoving", false);
     }
 
     protected virtual void OnAttack()
@@ -208,5 +211,17 @@ public class Character : MonoBehaviour
     protected virtual void StartFighting()
     {
         isAttack = true;
+    }
+
+    private void CheckGameStatus()
+    {
+        if (isEnemy)
+        {
+            GameManager.Instance.CheckEnemiesStatus();
+        }
+        else
+        {
+            GameManager.Instance.CheckPlayerStatus();
+        }
     }
 }

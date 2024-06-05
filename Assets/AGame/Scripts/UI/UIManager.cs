@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateMoney()
     {
-        moneyCount.text = GameManager.Instance.money.ToString();
+        moneyCount.text = GameManager.Instance.FormatMoney(GameManager.Instance.playerMoney);
     }
 
     public void SwitchTo(GameObject ui)

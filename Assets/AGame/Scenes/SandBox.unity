@@ -3556,7 +3556,7 @@ GameObject:
   - component: {fileID: 1201429846}
   - component: {fileID: 1201429845}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Quantity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4274,7 +4274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd163eaf12b0dd44b6c37d435e0b2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 200
+  playerMoney: 200
   isPlaying: 0
 --- !u!4 &1418206543
 Transform:
@@ -4803,7 +4803,7 @@ GameObject:
   - component: {fileID: 1638531317}
   - component: {fileID: 1638531316}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Quantity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5999,6 +5999,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1951469007}
+        m_TargetAssemblyTypeName: BuyManager, Assembly-CSharp
+        m_MethodName: UpdateBuyButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1951469005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6073,6 +6085,7 @@ MonoBehaviour:
   - {fileID: 700121653}
   buyWarriorButton: {fileID: 1951469004}
   buyArcherButton: {fileID: 1952787815}
+  priceText: {fileID: 1148824557}
 --- !u!1 &1952787813
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,6 +6185,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1952787818}
+        m_TargetAssemblyTypeName: BuyManager, Assembly-CSharp
+        m_MethodName: UpdateBuyButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1952787816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6246,6 +6271,7 @@ MonoBehaviour:
   - {fileID: 2001276818}
   buyWarriorButton: {fileID: 1951469004}
   buyArcherButton: {fileID: 1952787815}
+  priceText: {fileID: 1477252136}
 --- !u!114 &1969476202 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5138012061752412866, guid: ce3b71adc27841e439443f7e5d88695d, type: 3}

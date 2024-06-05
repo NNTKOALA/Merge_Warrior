@@ -24,7 +24,7 @@ public class Warrior : Character
             return;
         }
 
-        if (target == null && isAttack == false)
+        if (target == null)
         {
             FindClosestTarget();
         }
