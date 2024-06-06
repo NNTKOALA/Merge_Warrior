@@ -23,10 +23,10 @@ public class Archer : Character
     {
         base.Update();
 
-        if (!isAttack)
+/*        if (!isAttack)
         {
             return;
-        }
+        }*/
 
         FindClosestTarget();
 

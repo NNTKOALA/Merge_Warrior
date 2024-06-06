@@ -105,6 +105,7 @@ MonoBehaviour:
   characterLayer:
     serializedVersion: 2
     m_Bits: 64
+  isEnemy: 0
   healthBarPrefab: {fileID: 3004730373327838904, guid: 1e175dd626dca9b4d9cf441dc07e6095, type: 3}
   rb: {fileID: 2978416865913998257}
   targetLayer:
@@ -201,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 95717921525660796, guid: e832e597ac71628439a476072664cdea, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 95717921525660796, guid: e832e597ac71628439a476072664cdea, type: 3}
       propertyPath: m_Controller

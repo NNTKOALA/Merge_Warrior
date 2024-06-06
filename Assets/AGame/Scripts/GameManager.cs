@@ -42,14 +42,16 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        UIManager.Instance.SwitchToWinUI();
+        AudioManager.Instance.PlaySFX("Win");
         PauseGame();
+        UIManager.Instance.SwitchToWinUI();
     }
 
     public void LoseGame() 
     {
-        UIManager.Instance.SwitchToLoseUI();
+        AudioManager.Instance.PlaySFX("Lose");
         PauseGame();
+        UIManager.Instance.SwitchToLoseUI();
     }
 
     public void NextLevel()

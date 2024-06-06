@@ -25,12 +25,10 @@ public class BuyManager : MonoBehaviour
     private Color normalColor = Color.white;
     private Color disabledColor = Color.gray;
 
-    private SoundManager soundManager;
-
     // Start is called before the first frame update
     void Start()
     {
-        soundManager = FindObjectOfType<SoundManager>();
+        
     }
 
     // Update is called once per frame
@@ -134,7 +132,7 @@ public class BuyManager : MonoBehaviour
             purchaseCount++;
             UpdatePrice();
             UpdateBuyButtons();
-            soundManager.PlayBuyCharacterSound();
+            AudioManager.Instance.PlaySFX("Buy");
         }
     }
 

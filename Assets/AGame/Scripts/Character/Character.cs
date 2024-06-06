@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
-    public bool isAttack { get; set; } = false;
+    //public bool isAttack { get; set; } = false;
 
     public bool isEnemy;
 
@@ -39,7 +39,7 @@ public class Character : MonoBehaviour
     protected virtual void Start()
     {
         isDead = false;
-        isAttack = false;
+        //isAttack = false;
         OnIdle();
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -213,7 +213,7 @@ public class Character : MonoBehaviour
 
     protected virtual void StartFighting()
     {
-        isAttack = true;
+        //isAttack = true;
     }
 
     private void CheckGameStatus()

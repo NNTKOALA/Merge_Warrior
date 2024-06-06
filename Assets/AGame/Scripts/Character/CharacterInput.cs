@@ -15,7 +15,7 @@ public class CharacterInput : MonoBehaviour
     {
         mainCam = Camera.main;
     }
-    
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))

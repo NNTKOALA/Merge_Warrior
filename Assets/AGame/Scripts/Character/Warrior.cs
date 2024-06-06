@@ -19,10 +19,10 @@ public class Warrior : Character
     {
         base.Update();
 
-        if (!isAttack)
+/*        if (!isAttack)
         {
             return;
-        }
+        }*/
 
         if (target == null)
         {
