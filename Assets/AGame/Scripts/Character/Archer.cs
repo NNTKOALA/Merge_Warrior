@@ -28,12 +28,10 @@ public class Archer : Character
             return;
         }
 
-        if (target == null)
+        FindClosestTarget();
+
+        if (target != null)
         {
-            FindClosestTarget();
-        }
-        else
-        {            
             LookAtTarget();
 
             if (Time.time - lastAttackTime >= attackCooldown)
@@ -46,7 +44,7 @@ public class Archer : Character
 
     protected override void OnAttack()
     {
-        base.OnAttack();  
+        base.OnAttack();
         ProcessRayCast();
     }
 
@@ -61,7 +59,7 @@ public class Archer : Character
         Vector3 rayOrigin = rb.transform.position;
         Vector3 rayDirection = rb.transform.forward;
 
-        if (Physics.Raycast(rayOrigin, rayDirection, out hit, chaseRange, characterLayer))
+        if (Physics.Raycast(rayOrigin, rayDirection, out hit, attackRange, characterLayer))
         {
             if (hit.collider.gameObject != gameObject)
             {
@@ -70,6 +68,52 @@ public class Archer : Character
                 {
                     target.TakeDamage(damage);
                 }
+            }
+        }
+    }
+
+    protected override void FindClosestTarget()
+    {
+        Character[] enemies = FindObjectsOfType<Character>();
+        Transform closestTarget = null;
+        float maxDistance = attackRange;
+
+        foreach (Character enemy in enemies)
+        {
+            if (enemy == this || enemy.tag == this.tag)
+            {
+                continue;
+            }
+
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+
+            if (distanceToEnemy < maxDistance)
+            {
+                closestTarget = enemy.transform;
+                maxDistance = distanceToEnemy;
+            }
+        }
+
+        target = closestTarget;
+    }
+
+    protected override void LookAtTarget()
+    {
+        if (target != null)
+        {
+            Vector3 direction = (target.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
+
+            float targetDistance = Vector3.Distance(transform.position, target.position);
+
+            if (targetDistance <= attackRange)
+            {
+                OnAttack();
+            }
+            else
+            {
+                OnIdle();
             }
         }
     }

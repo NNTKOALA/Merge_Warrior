@@ -22,10 +22,15 @@ public class BuyManager : MonoBehaviour
     private const float priceIncreaseRate = 1.2f;
     private int purchaseCount = 0;
 
+    private Color normalColor = Color.white;
+    private Color disabledColor = Color.gray;
+
+    private SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -45,10 +50,6 @@ public class BuyManager : MonoBehaviour
         playerTileList[cellIndex].characterData.characterType = CharType.Warrior;
         playerTileList[cellIndex].characterData.characterLevel = CharLevel.Lv1;
         playerTileList[cellIndex].UpdateCharacter();
-
-        purchaseCount++;
-        UpdatePrice();
-        UpdateBuyButtons();
     }
 
     public void SpawnArcherUnit()
@@ -62,18 +63,14 @@ public class BuyManager : MonoBehaviour
         playerTileList[cellIndex].characterData.characterType = CharType.Archer;
         playerTileList[cellIndex].characterData.characterLevel = CharLevel.Lv1;
         playerTileList[cellIndex].UpdateCharacter();
-
-        purchaseCount++;
-        UpdatePrice();
-        UpdateBuyButtons();
     }
 
     public void UpdateBuyButtons()
     {
         if (isBattleStarted)
         {
-            buyWarriorButton.interactable = false;
-            buyArcherButton.interactable = false;
+            SetButtonState(buyWarriorButton, false);
+            SetButtonState(buyArcherButton, false);
             return;
         }
 
@@ -85,11 +82,11 @@ public class BuyManager : MonoBehaviour
         bool hasEnoughMoneyForWarrior = GameManager.Instance.HasEnoughMoney(warriorPrice);
         bool hasEnoughMoneyForArcher = GameManager.Instance.HasEnoughMoney(archerPrice);
 
-        buyWarriorButton.interactable = hasAvailableIndex && hasEnoughMoneyForWarrior;
-        buyArcherButton.interactable = hasAvailableIndex && hasEnoughMoneyForArcher;
+        SetButtonState(buyWarriorButton, hasAvailableIndex && hasEnoughMoneyForWarrior);
+        SetButtonState(buyArcherButton, hasAvailableIndex && hasEnoughMoneyForArcher);
     }
 
-    private int FindAvailableIndex()
+    public int FindAvailableIndex()
     {
         for (int i = 0; i < playerTileList.Count; i++)
         {
@@ -107,7 +104,7 @@ public class BuyManager : MonoBehaviour
         priceText.text = GameManager.Instance.FormatMoney(currentPrice);
     }
 
-    private void UpdatePrice()
+    public void UpdatePrice()
     {
         if (purchaseCount == 0)
         {
@@ -116,6 +113,10 @@ public class BuyManager : MonoBehaviour
         else if (purchaseCount == 1)
         {
             currentPrice = 120;
+        }
+        else if (purchaseCount == 2)
+        {
+            currentPrice = 120 * priceIncreaseRate;
         }
         else
         {
@@ -133,10 +134,16 @@ public class BuyManager : MonoBehaviour
             purchaseCount++;
             UpdatePrice();
             UpdateBuyButtons();
+            soundManager.PlayBuyCharacterSound();
         }
-        else
-        {
-            Debug.Log("Not enough money to buy the character.");
-        }
+    }
+
+    public void SetButtonState(Button button, bool isEnabled)
+    {
+        button.interactable = isEnabled;
+        ColorBlock colors = button.colors;
+        colors.normalColor = isEnabled ? normalColor : disabledColor;
+        colors.disabledColor = disabledColor;
+        button.colors = colors;
     }
 }

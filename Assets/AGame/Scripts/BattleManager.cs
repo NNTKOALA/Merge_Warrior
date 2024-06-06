@@ -11,9 +11,16 @@ public class BattleManager : MonoBehaviour
 
     private bool isAttack;
 
+    private SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        soundManager = FindObjectOfType<SoundManager>();
+
+        fightButton.onClick.AddListener(StartFighting);
+
         isAttack = false;
 
         if (fightButton != null)
@@ -46,8 +53,10 @@ public class BattleManager : MonoBehaviour
         StartFighting();
     }
 
-    private void StartFighting()
+    public void StartFighting()
     {
         Debug.Log("Battle has started!");
+        isAttack = true;
+        soundManager.PlayFightSound();
     }
 }

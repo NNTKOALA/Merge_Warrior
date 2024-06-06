@@ -136,7 +136,7 @@ public class Character : MonoBehaviour
         return charType;
     }
 
-    public void FindClosestTarget()
+    protected virtual void FindClosestTarget()
     {
         Character[] enemies = FindObjectsOfType<Character>();
         Transform closestTarget = null;
@@ -161,7 +161,7 @@ public class Character : MonoBehaviour
         target = closestTarget;
     }
 
-    public void MoveToTarget()
+    protected virtual void MoveToTarget()
     {
         if (target != null)
         {
@@ -174,7 +174,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void LookAtTarget()
+    protected virtual void LookAtTarget()
     {
         if (target != null)
         {
@@ -186,11 +186,16 @@ public class Character : MonoBehaviour
 
             if (targetDistance < attackRange)
             {
-                OnAttack();
+                if (Time.time - lastAttackTime > attackCooldown)
+                {
+                    OnAttack();
+                    lastAttackTime = Time.time;
+                    target.GetComponent<Character>().TakeDamage(damage); 
+                }
             }
             else
             {
-                OnIdle();
+                MoveToTarget();
             }
         }
     }
