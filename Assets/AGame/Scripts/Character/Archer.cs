@@ -23,16 +23,22 @@ public class Archer : Character
     {
         base.Update();
 
-/*        if (!isAttack)
+        if (startBattle && !isDead)
         {
-            return;
-        }*/
+            ProcessFight();
+        }
+    }
 
-        FindClosestTarget();
+    private void ProcessFight()
+    {
+        if (target == null)
+        {
+            FindClosestEnemy();
+        }
 
         if (target != null)
         {
-            LookAtTarget();
+            LookAtTarget(target.position);
 
             if (Time.time - lastAttackTime >= attackCooldown)
             {
@@ -68,52 +74,6 @@ public class Archer : Character
                 {
                     target.TakeDamage(damage);
                 }
-            }
-        }
-    }
-
-    protected override void FindClosestTarget()
-    {
-        Character[] enemies = FindObjectsOfType<Character>();
-        Transform closestTarget = null;
-        float maxDistance = attackRange;
-
-        foreach (Character enemy in enemies)
-        {
-            if (enemy == this || enemy.tag == this.tag)
-            {
-                continue;
-            }
-
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-
-            if (distanceToEnemy < maxDistance)
-            {
-                closestTarget = enemy.transform;
-                maxDistance = distanceToEnemy;
-            }
-        }
-
-        target = closestTarget;
-    }
-
-    protected override void LookAtTarget()
-    {
-        if (target != null)
-        {
-            Vector3 direction = (target.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
-
-            float targetDistance = Vector3.Distance(transform.position, target.position);
-
-            if (targetDistance <= attackRange)
-            {
-                OnAttack();
-            }
-            else
-            {
-                OnIdle();
             }
         }
     }

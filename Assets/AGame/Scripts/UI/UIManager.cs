@@ -8,14 +8,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; set; }
 
-    [SerializeField] GameObject inGameUI;
+    [SerializeField] GameObject mainMenuUI;
     [SerializeField] GameObject moneybarUI;
     [SerializeField] GameObject settingUI;
     [SerializeField] GameObject listCharacterUI;
+    [SerializeField] GameObject warriorListCardsUI;
+    [SerializeField] GameObject archerListCardsUI;
     [SerializeField] GameObject winUI;
     [SerializeField] GameObject loseUI;
-    [SerializeField] GameObject warriorCardsUI;
-    [SerializeField] GameObject archerCardsUI;
     [SerializeField] TextMeshProUGUI moneyCount;
 
     public void Awake()
@@ -44,14 +44,13 @@ public class UIManager : MonoBehaviour
 
     public void DeactiveAll()
     {
-        inGameUI.SetActive(false);
-        moneybarUI.SetActive(false);
+        mainMenuUI.SetActive(false);
         settingUI.SetActive(false);
         listCharacterUI.SetActive(false);
+        warriorListCardsUI.SetActive(false);
+        archerListCardsUI.SetActive(false);
         winUI.SetActive(false);
         loseUI.SetActive(false);
-        /*warriorCardsUI.SetActive(false);
-        archerCardsUI.SetActive(false);*/
     }
 
     public void UpdateMoney()
@@ -67,50 +66,50 @@ public class UIManager : MonoBehaviour
 
     public void SwitchToMainMenuUI()
     {
-        SwitchTo(moneybarUI);
+        SwitchTo(mainMenuUI);
         //UpdateMoney(ShopManager.Instance.Money);
     }
 
     public void SwitchToIngameUI()
     {
-        SwitchTo(inGameUI);
+        SwitchTo(moneybarUI);
     }
 
     public void SwitchToSettingUI()
     {
-        inGameUI.SetActive(true);
+        mainMenuUI.SetActive(true);
         settingUI.SetActive(true);
     }
 
     public void SwitchToListUI()
     {
-        inGameUI.SetActive(true) ;
+        mainMenuUI.SetActive(true) ;
         listCharacterUI.SetActive(true);
     }
 
     public void SwitchToWinUI()
     {
-        inGameUI.SetActive(true);
         winUI.SetActive(true);
     }
 
     public void SwitchToLoseUI()
     {
-        inGameUI.SetActive(true);
         loseUI.SetActive(true);
     }
 
     public void SwitchToWarriorCardUI()
     {
-        inGameUI.SetActive(true);
+        mainMenuUI.SetActive(true);
         listCharacterUI.SetActive(true);
-        warriorCardsUI.SetActive(true);
+        warriorListCardsUI.SetActive(true);
+        archerListCardsUI.SetActive(false);
     }
 
     public void SwitchToArcherCardUI()
     {
-        inGameUI.SetActive(true);
+        mainMenuUI.SetActive(true);
         listCharacterUI.SetActive(true);
-        archerCardsUI.SetActive(true);
+        warriorListCardsUI.SetActive(false);
+        archerListCardsUI.SetActive(true);
     }
 }

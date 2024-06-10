@@ -66,7 +66,6 @@ public class CharacterDragandDrop : MonoBehaviour
         if (currentTile != null)
         {
             currentTile.ResetColor();
-            currentTile = null;
         }
     }
 }

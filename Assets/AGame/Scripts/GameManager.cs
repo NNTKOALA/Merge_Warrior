@@ -12,13 +12,17 @@ public class GameManager : MonoBehaviour
     public bool isPlaying;
 
     public TextMeshProUGUI levelText;
-    public int playerLevel = 1;
+    public int currentLevelIndex = 1;
+
+    [SerializeField] private GameObject characterCardPrefab;
+    private GameObject characterCardInstance;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -37,7 +41,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            WinGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoseGame();
+        }
     }
 
     public void WinGame()
@@ -52,12 +64,6 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("Lose");
         PauseGame();
         UIManager.Instance.SwitchToLoseUI();
-    }
-
-    public void NextLevel()
-    {
-        playerLevel++;
-        UpdateLevelText();
     }
 
     public void PauseGame()
@@ -147,6 +153,25 @@ public class GameManager : MonoBehaviour
 
     public void UpdateLevelText()
     {
-        levelText.text = $"Level {playerLevel}";
+        if (levelText != null)
+        {
+            levelText.text = $"Level {currentLevelIndex}";
+        }
+        else
+        {
+            Debug.LogError("levelText is not assigned in the GameManager.");
+        }
+    }
+
+    public void DisplayCharacterCard(string name, int attack, int health)
+    {
+        characterCardInstance = Instantiate(characterCardPrefab, Vector3.zero, Quaternion.identity);
+        characterCardInstance.transform.SetParent(GameObject.Find("Canvas").transform, false);
+
+        CharacterCard characterCardUI = characterCardInstance.GetComponent<CharacterCard>();
+        if (characterCardUI != null)
+        {
+            characterCardUI.UpdateCharacterData(name, attack, health);
+        }
     }
 }

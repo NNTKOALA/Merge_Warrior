@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class Character : MonoBehaviour
@@ -21,13 +23,13 @@ public class Character : MonoBehaviour
 
     public LayerMask characterLayer;
 
-    private NavMeshAgent navMeshAgent;
+    protected NavMeshAgent navMeshAgent;
     protected Transform target;
     protected bool isTargetWithinRange;
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
-    //public bool isAttack { get; set; } = false;
+    public bool startBattle;
 
     public bool isEnemy;
 
@@ -39,7 +41,6 @@ public class Character : MonoBehaviour
     protected virtual void Start()
     {
         isDead = false;
-        //isAttack = false;
         OnIdle();
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -58,6 +59,13 @@ public class Character : MonoBehaviour
     protected virtual void Update()
     {
         if (isDead) return;
+
+        if (startBattle == false)
+        {
+            return;
+        }
+
+        CheckGameStatus();
     }
 
     protected void ChangeAnim(string animName)
@@ -107,18 +115,18 @@ public class Character : MonoBehaviour
         isDead = true;
         ChangeAnim("die");
         healthBar.gameObject.SetActive(false);
-        Destroy(gameObject, .1f);
+        Destroy(gameObject, .2f);
     }
 
     public void OnWin()
     {
         ChangeAnim("win");
-        UIManager.Instance.SwitchToWinUI();
+        GameManager.Instance.WinGame();
     }
 
     public void OnLose()
     {
-        UIManager.Instance.SwitchToLoseUI();
+        GameManager.Instance.LoseGame();
     }
 
     public int GetHealth()
@@ -136,11 +144,11 @@ public class Character : MonoBehaviour
         return charType;
     }
 
-    protected virtual void FindClosestTarget()
+    protected virtual void FindClosestEnemy()
     {
         Character[] enemies = FindObjectsOfType<Character>();
         Transform closestTarget = null;
-        float maxDistance = Mathf.Infinity;
+        float minDistance = Mathf.Infinity;
 
         foreach (Character enemy in enemies)
         {
@@ -151,53 +159,19 @@ public class Character : MonoBehaviour
 
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
 
-            if (distanceToEnemy < maxDistance)
-            {               
+            if (distanceToEnemy < minDistance)
+            {
                 closestTarget = enemy.transform;
-                maxDistance = distanceToEnemy;
+                minDistance = distanceToEnemy;
             }
         }
 
         target = closestTarget;
     }
 
-    protected virtual void MoveToTarget()
+    protected virtual void LookAtTarget(Vector3 target)
     {
-        if (target != null)
-        {
-            anim.SetBool("isMoving", true);
-            navMeshAgent.SetDestination(target.position);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
-        }
-    }
-
-    protected virtual void LookAtTarget()
-    {
-        if (target != null)
-        {
-            float targetDistance = Vector3.Distance(transform.position, target.position);
-
-            Vector3 direction = (target.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
-
-            if (targetDistance < attackRange)
-            {
-                if (Time.time - lastAttackTime > attackCooldown)
-                {
-                    OnAttack();
-                    lastAttackTime = Time.time;
-                    target.GetComponent<Character>().TakeDamage(damage); 
-                }
-            }
-            else
-            {
-                MoveToTarget();
-            }
-        }
+        transform.LookAt(target);
     }
 
     void OnDrawGizmosSelected()
@@ -208,12 +182,7 @@ public class Character : MonoBehaviour
 
     protected virtual void OnNewGame()
     {
-
-    }
-
-    protected virtual void StartFighting()
-    {
-        //isAttack = true;
+        
     }
 
     private void CheckGameStatus()

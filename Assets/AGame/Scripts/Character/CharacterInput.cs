@@ -6,10 +6,12 @@ using UnityEngine;
 public class CharacterInput : MonoBehaviour
 {
     [SerializeField] private LayerMask tileLayer;
+    [SerializeField] private float moveSpeed = 5f;
     private Camera mainCam;
 
     private PlayerTile startTile;
     private Transform characterTF = null;
+    private Vector3 targetPosition;
 
     private void Start()
     {
@@ -27,6 +29,7 @@ public class CharacterInput : MonoBehaviour
                 if (startTile != null)
                 {
                     characterTF = startTile.CurrentCharacterTF;
+                    //targetPosition = characterTF.position;
                 }
                 else
                 {
@@ -41,7 +44,7 @@ public class CharacterInput : MonoBehaviour
             Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, tileLayer))
             {
-                characterTF.position = hit.point;
+                targetPosition = hit.point;
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -65,6 +68,21 @@ public class CharacterInput : MonoBehaviour
                 startTile.ResetCharacterPosition();
                 startTile = null;
                 characterTF = null;
+            }
+        }
+
+        if (characterTF != null)
+        {
+            float step = moveSpeed * Time.deltaTime;
+            float distance = Vector3.Distance(characterTF.position, targetPosition);
+            if (distance < step)
+            {
+                characterTF.position = targetPosition;
+            }
+            else
+            {
+                Vector3 direction = (targetPosition - characterTF.position).normalized;
+                characterTF.position += direction * step;
             }
         }
     }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
 public class Warrior : Character
@@ -18,20 +20,19 @@ public class Warrior : Character
     protected override void Update()
     {
         base.Update();
+    }
 
-/*        if (!isAttack)
-        {
-            return;
-        }*/
-
+    private void ProcessFight()
+    {
         if (target == null)
         {
-            FindClosestTarget();
+            FindClosestEnemy();
         }
-        else
+
+        if (target != null)
         {
             MoveToTarget();
-            LookAtTarget();
+            LookAtTarget(target.position);
 
             if (Time.time - lastAttackTime >= attackCooldown)
             {
@@ -43,7 +44,7 @@ public class Warrior : Character
 
     protected override void OnAttack()
     {
-        base.OnAttack();       
+        base.OnAttack();
         AttackHitEvent();
     }
 
@@ -53,6 +54,23 @@ public class Warrior : Character
         {
             return;
         }
-        target.GetComponent<Character>().TakeDamage(damage);
+
+        if (target != null && target.tag != this.tag)
+        {
+            target.GetComponent<Character>().TakeDamage(damage);
+        }
+    }
+
+    public void MoveToTarget()
+    {
+        if (target != null)
+        {
+            anim.SetBool("isMoving", true);
+            navMeshAgent.SetDestination(target.position);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
+        }
     }
 }
