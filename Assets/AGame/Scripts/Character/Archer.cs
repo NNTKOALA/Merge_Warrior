@@ -2,28 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.GraphicsBuffer;
 
 public class Archer : Character
 {
     [SerializeField] Rigidbody rb;
-
     public LayerMask targetLayer;
 
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-
-        if (startBattle && !isDead)
+        if (GameManager.Instance.isFighting)
         {
             ProcessFight();
         }
@@ -35,46 +33,36 @@ public class Archer : Character
         {
             FindClosestEnemy();
         }
-
-        if (target != null)
+        else
         {
             LookAtTarget(target.position);
 
             if (Time.time - lastAttackTime >= attackCooldown)
             {
-                OnAttack();
+                AttackHitEvent();
                 lastAttackTime = Time.time;
             }
         }
     }
 
-    protected override void OnAttack()
+    private void AttackHitEvent()
     {
-        base.OnAttack();
-        ProcessRayCast();
-    }
-
-    private void ProcessRayCast()
-    {
-        if (rb == null)
+        if (target == null)
         {
             return;
         }
 
-        RaycastHit hit;
-        Vector3 rayOrigin = rb.transform.position;
-        Vector3 rayDirection = rb.transform.forward;
-
-        if (Physics.Raycast(rayOrigin, rayDirection, out hit, attackRange, characterLayer))
+        if (target != null && target.tag != this.tag)
         {
-            if (hit.collider.gameObject != gameObject)
-            {
-                Character target = hit.transform.GetComponent<Character>();
-                if (target != null && target.tag != this.tag)
-                {
-                    target.TakeDamage(damage);
-                }
-            }
+            OnAttack();
+            target.GetComponent<Character>().TakeDamage(damage);
+            OnIdle();
         }
+    }
+
+    public override void OnNewGame()
+    {
+        base.OnNewGame();
+        isDead = false;
     }
 }

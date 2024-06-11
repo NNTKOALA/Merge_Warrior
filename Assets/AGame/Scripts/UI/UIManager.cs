@@ -67,7 +67,6 @@ public class UIManager : MonoBehaviour
     public void SwitchToMainMenuUI()
     {
         SwitchTo(mainMenuUI);
-        //UpdateMoney(ShopManager.Instance.Money);
     }
 
     public void SwitchToIngameUI()
@@ -85,6 +84,8 @@ public class UIManager : MonoBehaviour
     {
         mainMenuUI.SetActive(true) ;
         listCharacterUI.SetActive(true);
+        warriorListCardsUI.SetActive(true);
+        archerListCardsUI.SetActive(false);
     }
 
     public void SwitchToWinUI()

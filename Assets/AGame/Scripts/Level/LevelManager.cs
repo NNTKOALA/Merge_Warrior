@@ -57,6 +57,7 @@ public class LevelManager : MonoBehaviour
 
             GameManager.Instance.currentLevelIndex = levelIndex + 1;
             GameManager.Instance.UpdateLevelText();
+            GameManager.Instance.ResetBattle();
         }
     }
 

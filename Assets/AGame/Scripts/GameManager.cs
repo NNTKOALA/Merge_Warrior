@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    [SerializeField] public Button fightButton;
+    public bool isFighting;
 
     public float playerMoney = 200;
     public bool isPlaying;
@@ -16,6 +21,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject characterCardPrefab;
     private GameObject characterCardInstance;
+
+    public LevelManager levelManager;
+
+    public TextMeshProUGUI winRewardText;
+    public TextMeshProUGUI loseRewardText;
 
     private void Awake()
     {
@@ -28,11 +38,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        if (fightButton != null)
+        {
+            fightButton.onClick.AddListener(StartBattle);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        isFighting = false;
         PauseGame();
         UIManager.Instance.UpdateMoney();
         UpdateLevelText();
@@ -50,20 +66,56 @@ public class GameManager : MonoBehaviour
         {
             LoseGame();
         }
+        CheckGameStatus();
     }
 
     public void WinGame()
     {
         AudioManager.Instance.PlaySFX("Win");
         PauseGame();
+        int totalPlayerSquadDamage = CalculateTotalPlayerSquadDamage();
+        int moneyEarned = totalPlayerSquadDamage * 10;
+        AddMoney(moneyEarned);
         UIManager.Instance.SwitchToWinUI();
+        winRewardText.text = $"Reward: + {moneyEarned} ";
     }
 
-    public void LoseGame() 
+    public void LoseGame()
     {
         AudioManager.Instance.PlaySFX("Lose");
         PauseGame();
+        int totalEnemySquadHP = CalculateTotalEnemySquadHP();
+        AddMoney(totalEnemySquadHP);
         UIManager.Instance.SwitchToLoseUI();
+        loseRewardText.text = $"Reward: + {totalEnemySquadHP} ";
+    }
+
+    private int CalculateTotalPlayerSquadDamage()
+    {
+        int totalDamage = 0;
+        Character[] characters = FindObjectsOfType<Character>();
+        foreach (Character character in characters)
+        {
+            if (!character.isEnemy && !character.isDead)
+            {
+                totalDamage += character.damage;
+            }
+        }
+        return totalDamage;
+    }
+
+    private int CalculateTotalEnemySquadHP()
+    {
+        int totalHP = 0;
+        Character[] characters = FindObjectsOfType<Character>();
+        foreach (Character character in characters)
+        {
+            if (character.isEnemy && character.isDead)
+            {
+                totalHP += character.maxHealth - character.health;
+            }
+        }
+        return totalHP;
     }
 
     public void PauseGame()
@@ -76,41 +128,44 @@ public class GameManager : MonoBehaviour
         isPlaying = true;
     }
 
-    public void CheckEnemiesStatus()
+    public void CheckGameStatus()
     {
-        bool allEnemiesDown = true;
-        Character[] enemies = FindObjectsOfType<Character>();
-        foreach (Character enemy in enemies)
+        int playerCount = 0;
+        int enemyCount = 0;
+        int alivePlayerCount = 0;
+        int aliveEnemyCount = 0;
+
+        Character[] characters = FindObjectsOfType<Character>();
+        foreach (Character character in characters)
         {
-            if (enemy != null)
+            if (character.isEnemy)
             {
-                allEnemiesDown = false;
-                break;
+                enemyCount++;
+                if (!character.isDead)
+                {
+                    aliveEnemyCount++;
+                }
+            }
+            else
+            {
+                playerCount++;
+                if (!character.isDead)
+                {
+                    alivePlayerCount++;
+                }
             }
         }
-        if (allEnemiesDown)
+
+        if (alivePlayerCount == 0 && playerCount > 0)
+        {
+            LoseGame();
+        }
+        else if (aliveEnemyCount == 0 && enemyCount > 0)
         {
             WinGame();
         }
     }
 
-    public void CheckPlayerStatus()
-    {
-        bool allPlayersDown = true;
-        Character[] players = FindObjectsOfType<Character>();
-        foreach (Character player in players)
-        {
-            if (player != null)
-            {
-                allPlayersDown = false;
-                break;
-            }
-        }
-        if (allPlayersDown)
-        {
-            LoseGame();
-        }
-    }
 
     public bool HasEnoughMoney(float amount)
     {
@@ -172,6 +227,26 @@ public class GameManager : MonoBehaviour
         if (characterCardUI != null)
         {
             characterCardUI.UpdateCharacterData(name, attack, health);
+        }
+    }
+
+    public void StartBattle()
+    {
+        isFighting = true;
+        Character[] characters = FindObjectsOfType<Character>();
+        foreach (Character character in characters)
+        {
+            character.StartBattle();
+        }
+    }
+
+    public void ResetBattle()
+    {
+        isFighting = false;
+        Character[] characters = FindObjectsOfType<Character>();
+        foreach (Character character in characters)
+        {
+            character.ResetBattle();
         }
     }
 }

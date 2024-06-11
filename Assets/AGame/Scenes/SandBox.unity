@@ -6383,11 +6383,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd163eaf12b0dd44b6c37d435e0b2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoney: 500
+  fightButton: {fileID: 563469718}
+  isFighting: 0
+  playerMoney: 800
   isPlaying: 0
   levelText: {fileID: 727408646}
   currentLevelIndex: 0
   characterCardPrefab: {fileID: 5692267390079661790, guid: 9d42f4ba8766a44499208959cde17dcd, type: 3}
+  levelManager: {fileID: 1958319947}
+  winRewardText: {fileID: 1551627969}
+  loseRewardText: {fileID: 743119695}
 --- !u!4 &1418206543
 Transform:
   m_ObjectHideFlags: 0
@@ -6946,8 +6951,8 @@ MonoBehaviour:
   moneybarUI: {fileID: 1162955849}
   settingUI: {fileID: 1112800750}
   listCharacterUI: {fileID: 527466704}
-  warriorListCardsUI: {fileID: 0}
-  archerListCardsUI: {fileID: 0}
+  warriorListCardsUI: {fileID: 1339976627}
+  archerListCardsUI: {fileID: 1108361811}
   winUI: {fileID: 1978267459}
   loseUI: {fileID: 1359790694}
   moneyCount: {fileID: 731100264}

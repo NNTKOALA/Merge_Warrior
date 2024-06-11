@@ -10,8 +10,8 @@ public class Character : MonoBehaviour
 {
     [SerializeField] public Animator anim;
     [SerializeField] LayerMask playerTile;
-    [SerializeField] protected int health;
-    [SerializeField] protected int damage;
+    [SerializeField] public int health;
+    [SerializeField] public int damage;
     [SerializeField] protected int attackRange;
     [SerializeField] CharLevel charLevel;
     [SerializeField] CharType charType;
@@ -29,11 +29,11 @@ public class Character : MonoBehaviour
 
     protected string currentAnim = "";
     public bool isDead { get; set; } = false;
-    public bool startBattle;
+    public bool isAttack { get; set; } = false;
 
     public bool isEnemy;
 
-    protected int maxHealth = 100;
+    public int maxHealth = 100;
     protected int currentHealth;
     public GameObject healthBarPrefab;
     private HealthBar healthBar;
@@ -41,6 +41,7 @@ public class Character : MonoBehaviour
     protected virtual void Start()
     {
         isDead = false;
+        isAttack = false;
         OnIdle();
         health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -60,7 +61,7 @@ public class Character : MonoBehaviour
     {
         if (isDead) return;
 
-        if (startBattle == false)
+        if (!GameManager.Instance.isFighting)
         {
             return;
         }
@@ -102,19 +103,21 @@ public class Character : MonoBehaviour
 
     protected virtual void OnIdle()
     {
+        isAttack = false;
         anim.SetBool("isMoving", false);
     }
 
     protected virtual void OnAttack()
     {
+        isAttack = true;
         ChangeAnim("attack");
     }
 
     public void OnDead()
     {
-        isDead = true;
         ChangeAnim("die");
         healthBar.gameObject.SetActive(false);
+        isDead = true;
         Destroy(gameObject, .2f);
     }
 
@@ -171,6 +174,7 @@ public class Character : MonoBehaviour
 
     protected virtual void LookAtTarget(Vector3 target)
     {
+        anim.SetBool("isMoving", false);
         transform.LookAt(target);
     }
 
@@ -180,20 +184,23 @@ public class Character : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 
-    protected virtual void OnNewGame()
+    public virtual void OnNewGame()
     {
         
     }
 
     private void CheckGameStatus()
     {
-        if (isEnemy)
-        {
-            GameManager.Instance.CheckEnemiesStatus();
-        }
-        else
-        {
-            GameManager.Instance.CheckPlayerStatus();
-        }
+        GameManager.Instance.CheckGameStatus();
+    }
+
+    public void StartBattle()
+    {
+        GameManager.Instance.isFighting = true;
+    }
+
+    public void ResetBattle()
+    {
+        GameManager.Instance.isFighting = false;
     }
 }
