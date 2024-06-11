@@ -65,7 +65,7 @@ public class CharacterInput : MonoBehaviour
             }
             else
             {
-                startTile.ResetCharacterPosition();
+                //startTile.ResetCharacterPosition();
                 startTile = null;
                 characterTF = null;
             }
@@ -128,6 +128,8 @@ public class CharacterInput : MonoBehaviour
 
             firstTile.UpdateCharacter();
             secondTile.UpdateCharacter();
+
+            UIManager.Instance.ShowCharCardUI();
         }
         else
         {

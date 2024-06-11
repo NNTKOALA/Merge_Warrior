@@ -38,7 +38,7 @@ public class Warrior : Character
 
             if (IsTargetInRange() && Time.time - lastAttackTime >= attackCooldown)
             {
-                LookAtTarget(target.position);
+                //LookAtTarget(target.position);
                 OnAttack();
                 lastAttackTime = Time.time;
             }

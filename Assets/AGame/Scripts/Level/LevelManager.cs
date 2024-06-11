@@ -70,7 +70,8 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("You win the game!!!!!!");
+            currentLevelIndex = 0;
+            LoadLevel(currentLevelIndex);
         }
     }
 

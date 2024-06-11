@@ -96,14 +96,18 @@ public class PlayerTile : MonoBehaviour
     {
         if (currentCharacter != null)
         {
-            Debug.Log("Destroy Character");
             Destroy(currentCharacter);
         }
+
         currentCharacter = null;
 
-        if (characterData.characterType == CharType.None) return;
+        if (characterData.characterType == CharType.None)
+        {
+            return;
+        }
 
         GameObject prefab = CharacterData.Instance.GetCharacterPrefab(characterData.characterType, characterData.characterLevel);
+
         currentCharacter = Instantiate(prefab, transform.position, Quaternion.identity);
     }
 }

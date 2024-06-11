@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject mainMenuUI;
     [SerializeField] GameObject moneybarUI;
     [SerializeField] GameObject settingUI;
+    [SerializeField] GameObject charCardUI;
     [SerializeField] GameObject listCharacterUI;
     [SerializeField] GameObject warriorListCardsUI;
     [SerializeField] GameObject archerListCardsUI;
@@ -46,6 +47,7 @@ public class UIManager : MonoBehaviour
     {
         mainMenuUI.SetActive(false);
         settingUI.SetActive(false);
+        charCardUI.SetActive(false);
         listCharacterUI.SetActive(false);
         warriorListCardsUI.SetActive(false);
         archerListCardsUI.SetActive(false);
@@ -112,5 +114,10 @@ public class UIManager : MonoBehaviour
         listCharacterUI.SetActive(true);
         warriorListCardsUI.SetActive(false);
         archerListCardsUI.SetActive(true);
+    }
+
+    public void ShowCharCardUI()
+    {
+        charCardUI.SetActive(true);
     }
 }

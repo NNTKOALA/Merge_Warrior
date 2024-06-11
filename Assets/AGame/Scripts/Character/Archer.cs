@@ -35,7 +35,7 @@ public class Archer : Character
         }
         else
         {
-            LookAtTarget(target.position);
+            //LookAtTarget(target.position);
 
             if (Time.time - lastAttackTime >= attackCooldown)
             {
@@ -57,6 +57,19 @@ public class Archer : Character
             OnAttack();
             target.GetComponent<Character>().TakeDamage(damage);
             OnIdle();
+        }
+    }
+
+    protected override void OnAttack()
+    {
+        if (target != null)
+        {
+            Character enemy = target.GetComponent<Character>();
+            if (enemy != null)
+            {
+                ChangeAnim("attack");
+                enemy.TakeDamage(damage);
+            }
         }
     }
 

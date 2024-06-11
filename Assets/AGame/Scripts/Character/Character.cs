@@ -33,8 +33,7 @@ public class Character : MonoBehaviour
 
     public bool isEnemy;
 
-    public int maxHealth = 100;
-    protected int currentHealth;
+    public int currentHealth;
     public GameObject healthBarPrefab;
     private HealthBar healthBar;
 
@@ -43,14 +42,13 @@ public class Character : MonoBehaviour
         isDead = false;
         isAttack = false;
         OnIdle();
-        health = 100;
         navMeshAgent = GetComponent<NavMeshAgent>();
 
-        currentHealth = maxHealth;
+        currentHealth = health;
         GameObject hb = Instantiate(healthBarPrefab, transform);
         hb.transform.localPosition = new Vector3(0, 2, 0);
         healthBar = hb.GetComponentInChildren<HealthBar>();
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(health);
         if (gameObject.tag == "Enemy")
         {
             healthBar.SetHealthBarColor(Color.red);
@@ -65,8 +63,6 @@ public class Character : MonoBehaviour
         {
             return;
         }
-
-        CheckGameStatus();
     }
 
     protected void ChangeAnim(string animName)
@@ -95,7 +91,7 @@ public class Character : MonoBehaviour
     {
         health -= damage;
         healthBar.SetHealth(health);
-        if (health <= 0)
+        if (health < 0)
         {
             OnDead();
         }
@@ -172,11 +168,11 @@ public class Character : MonoBehaviour
         target = closestTarget;
     }
 
-    protected virtual void LookAtTarget(Vector3 target)
+/*    protected virtual void LookAtTarget(Vector3 target)
     {
         anim.SetBool("isMoving", false);
         transform.LookAt(target);
-    }
+    }*/
 
     void OnDrawGizmosSelected()
     {
@@ -186,12 +182,7 @@ public class Character : MonoBehaviour
 
     public virtual void OnNewGame()
     {
-        
-    }
 
-    private void CheckGameStatus()
-    {
-        GameManager.Instance.CheckGameStatus();
     }
 
     public void StartBattle()
