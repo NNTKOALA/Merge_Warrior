@@ -56,7 +56,6 @@ public class Archer : Character
         {
             OnAttack();
             target.GetComponent<Character>().TakeDamage(damage);
-            OnIdle();
         }
     }
 

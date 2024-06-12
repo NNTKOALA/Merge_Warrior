@@ -23,11 +23,11 @@ MonoBehaviour:
       characterType: 1
       characterLevel: 1
     - x: 0
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 0
     - x: 5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 0
   - enemyTiles:
@@ -40,20 +40,20 @@ MonoBehaviour:
       characterType: 1
       characterLevel: 1
     - x: -5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 0
     - x: 0
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 0
     - x: 5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 0
   - enemyTiles:
     - x: 0
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 0
     - x: -2.5
@@ -65,16 +65,16 @@ MonoBehaviour:
       characterType: 1
       characterLevel: 1
     - x: -2.5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 1
     - x: 2.5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 1
   - enemyTiles:
     - x: 0
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 0
     - x: 5
@@ -82,11 +82,11 @@ MonoBehaviour:
       characterType: 1
       characterLevel: 1
     - x: 2.5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 1
     - x: -2.5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 1
     - x: 0
@@ -95,11 +95,11 @@ MonoBehaviour:
       characterLevel: 2
   - enemyTiles:
     - x: 0
-      z: 7
+      z: 9
       characterType: 1
       characterLevel: 1
     - x: 5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 1
     - x: 2.5
@@ -111,6 +111,6 @@ MonoBehaviour:
       characterType: 1
       characterLevel: 2
     - x: -5
-      z: 9
+      z: 12
       characterType: 2
       characterLevel: 2

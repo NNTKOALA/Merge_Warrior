@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; set; }
 
+    [SerializeField] GameObject gameMenuUI;
     [SerializeField] GameObject mainMenuUI;
     [SerializeField] GameObject moneybarUI;
     [SerializeField] GameObject settingUI;
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject winUI;
     [SerializeField] GameObject loseUI;
     [SerializeField] TextMeshProUGUI moneyCount;
+    [SerializeField] GameObject map;
 
     public void Awake()
     {
@@ -34,13 +36,18 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameMenuUI.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void StartNewGame()
+    {
+        GameManager.Instance.OnNewGame();
     }
 
     public void DeactiveAll()
@@ -53,6 +60,7 @@ public class UIManager : MonoBehaviour
         archerListCardsUI.SetActive(false);
         winUI.SetActive(false);
         loseUI.SetActive(false);
+        map.SetActive(false);
     }
 
     public void UpdateMoney()
@@ -69,11 +77,15 @@ public class UIManager : MonoBehaviour
     public void SwitchToMainMenuUI()
     {
         SwitchTo(mainMenuUI);
+        gameMenuUI.SetActive(false);
+        map.SetActive(true);
+        moneybarUI.SetActive(true);
     }
 
     public void SwitchToIngameUI()
     {
         SwitchTo(moneybarUI);
+        map.SetActive(true);
     }
 
     public void SwitchToSettingUI()
@@ -119,5 +131,10 @@ public class UIManager : MonoBehaviour
     public void ShowCharCardUI()
     {
         charCardUI.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

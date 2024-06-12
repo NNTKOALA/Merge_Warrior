@@ -133,16 +133,6 @@ public class Character : MonoBehaviour
         return health;
     }
 
-    public CharLevel GetLevel()
-    {
-        return charLevel;
-    }
-
-    public CharType GetCharType()
-    {
-        return charType;
-    }
-
     protected virtual void FindClosestEnemy()
     {
         Character[] enemies = FindObjectsOfType<Character>();

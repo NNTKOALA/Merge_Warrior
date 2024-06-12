@@ -109,6 +109,32 @@ public class PlayerTile : MonoBehaviour
         GameObject prefab = CharacterData.Instance.GetCharacterPrefab(characterData.characterType, characterData.characterLevel);
 
         currentCharacter = Instantiate(prefab, transform.position, Quaternion.identity);
+
+        Character characterScript = currentCharacter.GetComponent<Character>();
+        if (characterScript != null)
+        {
+            characterScript.GetHealth();
+        }
+    }
+
+    public void SpawnCharacterWithHealth()
+    {
+        if (characterData.characterType != CharType.None)
+        {
+            if (currentCharacter != null)
+            {
+                Destroy(currentCharacter);
+            }
+
+            GameObject prefab = CharacterData.Instance.GetCharacterPrefab(characterData.characterType, characterData.characterLevel);
+            currentCharacter = Instantiate(prefab, transform.position, Quaternion.identity);
+            
+            Character characterScript = currentCharacter.GetComponent<Character>();
+            if (characterScript != null)
+            {
+                characterScript.GetHealth();
+            }
+        }
     }
 }
 

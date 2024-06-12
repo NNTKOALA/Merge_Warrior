@@ -4,7 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +13,6 @@ public class GameManager : MonoBehaviour
     public bool isFighting;
 
     public float playerMoney = 200;
-    public bool isPlaying;
 
     public TextMeshProUGUI levelText;
     public int currentLevelIndex = 1;
@@ -24,7 +22,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI winRewardText;
     public TextMeshProUGUI loseRewardText;
 
-    [SerializeField] public Button resetDataButton; 
+    [SerializeField] public Button resetDataButton;
 
     private void Awake()
     {
@@ -48,7 +46,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         isFighting = false;
-        PauseGame();
         UIManager.Instance.UpdateMoney();
         UpdateLevelText();
     }
@@ -100,11 +97,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("WinGame method called");
         AudioManager.Instance.PlaySFX("Win");
-        PauseGame();
         int totalPlayerSquadDamage = CalculateTotalPlayerSquadDamage();
         Debug.Log($"Total player squad damage: {totalPlayerSquadDamage}");
         AddMoney(totalPlayerSquadDamage);
-        winRewardText.text = $"Reward: + {totalPlayerSquadDamage} ";
+        winRewardText.text = $" Reward: + {totalPlayerSquadDamage * 10}";
         StartCoroutine(DisplayWinScreenAfterDelay(2f));
     }
 
@@ -112,52 +108,29 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LoseGame method called");
         AudioManager.Instance.PlaySFX("Lose");
-        PauseGame();
-        int totalEnemySquadHP = CalculateTotalEnemySquadHP();
-        Debug.Log($"Total enemy squad HP lost: {totalEnemySquadHP}");
-        AddMoney(totalEnemySquadHP);
-        loseRewardText.text = $"Reward: + {totalEnemySquadHP} ";
+        int totalPlayerSquadDamage = CalculateTotalPlayerSquadDamage();
+        Debug.Log($"Total player squad damage: {totalPlayerSquadDamage}");
+        AddMoney(totalPlayerSquadDamage);
+        loseRewardText.text = $" Reward: + {totalPlayerSquadDamage * 10}";
         StartCoroutine(DisplayLoseScreenAfterDelay(2f));
     }
 
     private int CalculateTotalPlayerSquadDamage()
     {
         int totalDamage = 0;
-        Character[] characters = FindObjectsOfType<Character>();
-        foreach (Character character in characters)
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        Debug.Log($"Number of Player Objects: {playerObjects.Length}");
+
+        foreach (GameObject playerObject in playerObjects)
         {
-            if (!character.isEnemy && !character.isDead)
+            Character character = playerObject.GetComponent<Character>();
+            if (character != null && !character.isEnemy)
             {
                 totalDamage += character.damage;
             }
         }
-        Debug.Log($"CalculateTotalPlayerSquadDamage: {totalDamage}");
         return totalDamage;
-    }
-
-    private int CalculateTotalEnemySquadHP()
-    {
-        int totalHP = 0;
-        Character[] characters = FindObjectsOfType<Character>();
-        foreach (Character character in characters)
-        {
-            if (character.isEnemy && character.isDead)
-            {
-                totalHP += character.health;
-            }
-        }
-        Debug.Log($"CalculateTotalEnemySquadHP: {totalHP}");
-        return totalHP;
-    }
-
-    public void PauseGame()
-    {
-        isPlaying = false;
-    }
-
-    public void ResumeGame()
-    {
-        isPlaying = true;
     }
 
     private IEnumerator DisplayWinScreenAfterDelay(float delay)
@@ -244,8 +217,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ResetGameData()
+/*    public void ResetGameData()
     {
         Debug.Log("Reset Game Data");
+
+        playerMoney = 800;
+        currentLevelIndex = 1;
+        UpdateLevelText();
+        UIManager.Instance.UpdateMoney();
+    }*/
+
+    public void OnNewGame()
+    {
+        PlayerTile[] allTiles = FindObjectsOfType<PlayerTile>();
+
+        foreach (PlayerTile tile in allTiles)
+        {
+            tile.SpawnCharacterWithHealth();
+        }
     }
 }

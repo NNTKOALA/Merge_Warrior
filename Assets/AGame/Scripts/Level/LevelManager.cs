@@ -18,15 +18,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            NextLevel();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RestartLevel();
-        }
+        
     }
 
     public void LoadLevel(int levelIndex)
@@ -58,6 +50,7 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.currentLevelIndex = levelIndex + 1;
             GameManager.Instance.UpdateLevelText();
             GameManager.Instance.ResetBattle();
+            GameManager.Instance.OnNewGame();
         }
     }
 
@@ -77,6 +70,12 @@ public class LevelManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        LoadLevel(currentLevelIndex);
+    }
+
+    public void NewGameLevel()
+    {
+        currentLevelIndex = 0;
         LoadLevel(currentLevelIndex);
     }
 }
