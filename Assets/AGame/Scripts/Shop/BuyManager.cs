@@ -67,8 +67,6 @@ public class BuyManager : MonoBehaviour
     {
         if (isBattleStarted)
         {
-            SetButtonState(buyWarriorButton, false);
-            SetButtonState(buyArcherButton, false);
             return;
         }
 
@@ -79,9 +77,6 @@ public class BuyManager : MonoBehaviour
 
         bool hasEnoughMoneyForWarrior = GameManager.Instance.HasEnoughMoney(warriorPrice);
         bool hasEnoughMoneyForArcher = GameManager.Instance.HasEnoughMoney(archerPrice);
-
-        SetButtonState(buyWarriorButton, hasAvailableIndex && hasEnoughMoneyForWarrior);
-        SetButtonState(buyArcherButton, hasAvailableIndex && hasEnoughMoneyForArcher);
     }
 
     public int FindAvailableIndex()
@@ -132,14 +127,5 @@ public class BuyManager : MonoBehaviour
             UpdateBuyButtons();
             AudioManager.Instance.PlaySFX("Buy");
         }
-    }
-
-    public void SetButtonState(Button button, bool isEnabled)
-    {
-        button.interactable = isEnabled;
-        ColorBlock colors = button.colors;
-        colors.normalColor = isEnabled ? normalColor : disabledColor;
-        colors.disabledColor = disabledColor;
-        button.colors = colors;
     }
 }

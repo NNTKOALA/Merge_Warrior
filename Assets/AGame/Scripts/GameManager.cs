@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         int totalPlayerSquadDamage = CalculateTotalPlayerSquadDamage();
         Debug.Log($"Total player squad damage: {totalPlayerSquadDamage}");
         AddMoney(totalPlayerSquadDamage);
-        winRewardText.text = $" Reward: + {totalPlayerSquadDamage * 10}";
+        winRewardText.text = $" Reward: + {totalPlayerSquadDamage}";
         StartCoroutine(DisplayWinScreenAfterDelay(2f));
     }
 
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         int totalPlayerSquadDamage = CalculateTotalPlayerSquadDamage();
         Debug.Log($"Total player squad damage: {totalPlayerSquadDamage}");
         AddMoney(totalPlayerSquadDamage);
-        loseRewardText.text = $" Reward: + {totalPlayerSquadDamage * 10}";
+        loseRewardText.text = $" Reward: + {totalPlayerSquadDamage}";
         StartCoroutine(DisplayLoseScreenAfterDelay(2f));
     }
 
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject playerObject in playerObjects)
         {
             Character character = playerObject.GetComponent<Character>();
-            if (character != null && !character.isEnemy)
+            if (character != null)
             {
                 totalDamage += character.damage;
             }
@@ -193,18 +193,25 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("levelText is not assigned in the GameManager.");
+            levelText.text = $"You finish the beta test";
         }
     }
 
     public void StartBattle()
     {
         isFighting = true;
+        StartCoroutine(StartBattleWithDelay(2.0f));
+    }
+
+    private IEnumerator StartBattleWithDelay(float delay)
+    {
         Character[] characters = FindObjectsOfType<Character>();
         foreach (Character character in characters)
         {
             character.StartBattle();
         }
+
+        yield return new WaitForSeconds(delay);
     }
 
     public void ResetBattle()

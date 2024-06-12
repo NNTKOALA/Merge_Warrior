@@ -56,26 +56,19 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
-        if (currentLevelIndex + 1 <= levelData.levels.Length)
+        if (currentLevelIndex + 1 < levelData.levels.Length)
         {
             currentLevelIndex++;
             LoadLevel(currentLevelIndex);
         }
         else
         {
-            currentLevelIndex = 0;
-            LoadLevel(currentLevelIndex);
+            RestartLevel();
         }
     }
 
     public void RestartLevel()
     {
-        LoadLevel(currentLevelIndex);
-    }
-
-    public void NewGameLevel()
-    {
-        currentLevelIndex = 0;
         LoadLevel(currentLevelIndex);
     }
 }
